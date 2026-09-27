@@ -834,124 +834,287 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
 
       </div>
 
-      {/* New Requisition Modal */}
+      {/* New Requisition / Urgent Intake Modal (Design: 1._urgent_request_matching_intake_1) */}
       {showNewRequestModal && (
-        <div className="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded border border-slate-200 shadow-xl max-w-lg w-full p-5 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-              <div className="flex items-center space-x-2">
-                <Building2 className="w-4 h-4 text-red-700" />
-                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                  Issue Hospital Blood Requisition
-                </h3>
+        <div className="fixed inset-0 bg-[#0d1c2f]/70 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-white rounded-lg border border-[#cbd5e1] shadow-2xl max-w-2xl w-full my-6 overflow-hidden">
+            
+            {/* Modal Header */}
+            <div className="bg-[#0d1c2f] text-white px-5 py-4 flex items-center justify-between border-b border-slate-800">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 rounded bg-[#991b1b] flex items-center justify-center text-white border border-[#760009]">
+                  <span className="material-symbols-outlined text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    emergency_heat
+                  </span>
+                </div>
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <span className="font-mono text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                      FORM-204 // INTAKE
+                    </span>
+                    <h3 className="font-headline font-bold text-sm text-white tracking-tight">
+                      Initiate Targeted Donor Match
+                    </h3>
+                  </div>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    District 04 Verified Phlebotomy Network &bull; Cold-Chain &amp; Cooldown Enforced
+                  </p>
+                </div>
               </div>
               <button
                 onClick={() => setShowNewRequestModal(false)}
-                className="p-1 rounded text-slate-400 hover:text-slate-700"
+                className="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                title="Close modal"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleCreateRequest} className="space-y-3 text-xs">
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Requesting Healthcare Facility</label>
-                <select
-                  value={newReq.hospital_name}
-                  onChange={(e) => setNewReq({ ...newReq, hospital_name: e.target.value })}
-                  className="w-full border border-slate-300 rounded px-2.5 py-1.5 bg-white text-slate-900"
-                >
-                  <option value="General Hospital Ernakulam">General Hospital Ernakulam</option>
-                  <option value="Government Medical College Kalamassery">Government Medical College Kalamassery</option>
-                  <option value="Aluva Taluk Headquarters Hospital">Aluva Taluk Headquarters Hospital</option>
-                  <option value="Muvattupuzha General Hospital">Muvattupuzha General Hospital</option>
-                  <option value="Amrita Institute of Medical Sciences (AIMS)">Amrita Institute of Medical Sciences (AIMS)</option>
-                </select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
+            {/* Modal Body Form */}
+            <form onSubmit={handleCreateRequest} className="p-5 space-y-4 max-h-[82vh] overflow-y-auto">
+              
+              {/* Urgency Level Triage Bar */}
+              <div className="bg-[#eff4ff] border border-[#cbd5e1] p-3 rounded flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Blood Group Required</label>
-                  <select
-                    value={newReq.blood_group}
-                    onChange={(e) => setNewReq({ ...newReq, blood_group: e.target.value })}
-                    className="w-full border border-slate-300 rounded px-2.5 py-1.5 bg-white font-mono font-bold text-red-700"
-                  >
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                  </select>
+                  <span className="text-xs font-semibold text-[#0d1c2f] block">
+                    Clinical Urgency Triage
+                  </span>
+                  <span className="text-[11px] text-[#565e74]">
+                    Determines dispatch propagation and notification priority
+                  </span>
                 </div>
-
-                <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Required Component</label>
-                  <select
-                    value={newReq.component}
-                    onChange={(e) => setNewReq({ ...newReq, component: e.target.value })}
-                    className="w-full border border-slate-300 rounded px-2.5 py-1.5 bg-white text-slate-900"
-                  >
-                    <option value="Whole Blood">Whole Blood</option>
-                    <option value="PRBC">Packed Red Blood Cells (PRBC)</option>
-                    <option value="Platelets">Platelets / Apheresis (SDP)</option>
-                    <option value="FFP">Fresh Frozen Plasma (FFP)</option>
-                  </select>
+                <div className="flex items-center gap-1.5 self-start sm:self-center">
+                  {[
+                    { key: 'Elective', label: 'Routine (24h)', icon: null },
+                    { key: 'Critical', label: 'Critical (<6h)', icon: null },
+                    { key: 'Emergency', label: 'STAT Emergency', icon: 'priority_high' },
+                  ].map((lvl) => {
+                    const isSelected = newReq.urgency_level === lvl.key;
+                    return (
+                      <button
+                        key={lvl.key}
+                        type="button"
+                        onClick={() => setNewReq({ ...newReq, urgency_level: lvl.key })}
+                        className={`px-2.5 py-1 text-xs font-semibold rounded transition-all flex items-center gap-1 ${
+                          isSelected
+                            ? lvl.key === 'Emergency'
+                              ? 'bg-[#991b1b] text-white shadow-xs border border-[#760009]'
+                              : lvl.key === 'Critical'
+                              ? 'bg-amber-600 text-white shadow-xs'
+                              : 'bg-[#0d1c2f] text-white shadow-xs'
+                            : 'bg-white text-[#565e74] border border-[#cbd5e1] hover:border-slate-400'
+                        }`}
+                      >
+                        {lvl.icon && (
+                          <span className="material-symbols-outlined text-xs">
+                            {lvl.icon}
+                          </span>
+                        )}
+                        <span>{lvl.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Units Required</label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="10"
-                    value={newReq.units_required}
-                    onChange={(e) => setNewReq({ ...newReq, units_required: parseInt(e.target.value) || 1 })}
-                    className="w-full border border-slate-300 rounded px-2.5 py-1.5 font-mono"
-                  />
+              {/* Safe Interval Rule Notice */}
+              <div className="bg-[#f8f9ff] border-l-4 border-[#991b1b] p-3 rounded-r border-y border-r border-[#cbd5e1] text-xs">
+                <div className="flex items-center space-x-1.5 font-bold text-[#991b1b]">
+                  <span className="material-symbols-outlined text-sm">verified_user</span>
+                  <span>Mandatory Safe Interval Protocol Active</span>
+                </div>
+                <p className="text-[11px] text-[#565e74] mt-0.5 leading-relaxed">
+                  Only donors who have passed their statutory recovery interval (90 days for Whole Blood, 120 days for females, 14 days for Platelets) will be notified. Personal phone numbers remain masked.
+                </p>
+              </div>
+
+              {/* Section 1: Facility & Patient Details */}
+              <div className="space-y-3 pt-1">
+                <div className="text-xs font-bold text-[#0d1c2f] uppercase tracking-wider flex items-center gap-1.5 pb-1 border-b border-[#cbd5e1]">
+                  <Building2 className="w-3.5 h-3.5 text-[#991b1b]" />
+                  <span>1. Facility &amp; Clinical Authentication</span>
                 </div>
 
-                <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Clinical Urgency</label>
-                  <select
-                    value={newReq.urgency_level}
-                    onChange={(e) => setNewReq({ ...newReq, urgency_level: e.target.value })}
-                    className="w-full border border-slate-300 rounded px-2.5 py-1.5 bg-white text-slate-900"
-                  >
-                    <option value="Emergency">Emergency (Immediate)</option>
-                    <option value="Critical">Critical (Within 6 hours)</option>
-                    <option value="Elective">Elective (Within 24 hours)</option>
-                  </select>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <label className="block text-[11px] font-semibold text-[#0d1c2f] mb-1">
+                      Requesting Healthcare Facility
+                    </label>
+                    <select
+                      value={newReq.hospital_name}
+                      onChange={(e) => {
+                        const h = e.target.value;
+                        let taluk = 'Kanayannur';
+                        if (h.includes('Kalamassery') || h.includes('Aluva')) taluk = 'Aluva';
+                        if (h.includes('Muvattupuzha')) taluk = 'Muvattupuzha';
+                        setNewReq({ ...newReq, hospital_name: h, hospital_taluk: taluk });
+                      }}
+                      className="w-full border border-[#cbd5e1] rounded px-3 py-1.5 bg-white text-xs text-[#0d1c2f] focus:border-[#991b1b] focus:ring-1 focus:ring-[#991b1b]"
+                    >
+                      <option value="General Hospital Ernakulam">General Hospital Ernakulam (Kanayannur)</option>
+                      <option value="Government Medical College Kalamassery">Government Medical College Kalamassery (Aluva)</option>
+                      <option value="Aluva Taluk Headquarters Hospital">Aluva Taluk Headquarters Hospital (Aluva)</option>
+                      <option value="Muvattupuzha General Hospital">Muvattupuzha General Hospital (Muvattupuzha)</option>
+                      <option value="Amrita Institute of Medical Sciences (AIMS)">Amrita Institute of Medical Sciences - AIMS (Kanayannur)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-semibold text-[#0d1c2f] mb-1">
+                      Patient Code / Token
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={newReq.patient_code}
+                      onChange={(e) => setNewReq({ ...newReq, patient_code: e.target.value })}
+                      className="w-full border border-[#cbd5e1] rounded px-3 py-1.5 bg-white text-xs font-mono font-bold text-[#0d1c2f] focus:border-[#991b1b] focus:ring-1 focus:ring-[#991b1b]"
+                      placeholder="e.g. PT-ER-904"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Patient ID / Case Code</label>
-                <input
-                  type="text"
-                  value={newReq.patient_code}
-                  onChange={(e) => setNewReq({ ...newReq, patient_code: e.target.value })}
-                  className="w-full border border-slate-300 rounded px-2.5 py-1.5 font-mono"
-                  placeholder="e.g. PT-ICU-882"
-                />
+              {/* Section 2: Blood Phenotype & Component */}
+              <div className="space-y-3 pt-2">
+                <div className="text-xs font-bold text-[#0d1c2f] uppercase tracking-wider flex items-center justify-between pb-1 border-b border-[#cbd5e1]">
+                  <div className="flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-sm text-[#991b1b]">bloodtype</span>
+                    <span>2. Target Blood Phenotype &amp; Component</span>
+                  </div>
+                  <span className="text-[11px] font-mono text-[#991b1b] font-semibold">
+                    Selected: {newReq.blood_group} &bull; {newReq.component}
+                  </span>
+                </div>
+
+                {/* Blood Group Pill Grid */}
+                <div>
+                  <label className="block text-[11px] font-semibold text-[#565e74] mb-1.5 uppercase tracking-wider">
+                    Select Target ABO / Rh Factor:
+                  </label>
+                  <div className="grid grid-cols-4 sm:grid-cols-8 gap-1.5">
+                    {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map((bg) => {
+                      const isSelected = newReq.blood_group === bg;
+                      const isUniversal = bg === 'O-';
+                      return (
+                        <button
+                          key={bg}
+                          type="button"
+                          onClick={() => setNewReq({ ...newReq, blood_group: bg })}
+                          className={`p-2 rounded border text-center transition-all relative ${
+                            isSelected
+                              ? 'bg-[#991b1b] text-white border-[#760009] shadow-xs'
+                              : 'bg-white text-[#0d1c2f] border-[#cbd5e1] hover:border-[#991b1b] hover:bg-[#eff4ff]'
+                          }`}
+                        >
+                          {isUniversal && (
+                            <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-[#0d1c2f] text-white text-[7px] font-bold px-1 rounded uppercase tracking-wider">
+                              Univ
+                            </span>
+                          )}
+                          <span className="font-headline font-bold text-sm block">
+                            {bg}
+                          </span>
+                          <span className={`text-[9px] font-mono block ${isSelected ? 'text-red-200' : 'text-[#565e74]'}`}>
+                            {bg.includes('-') ? 'Rh Neg' : 'Rh Pos'}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Component Type Cards */}
+                <div>
+                  <label className="block text-[11px] font-semibold text-[#565e74] mb-1.5 uppercase tracking-wider">
+                    Component Type:
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {[
+                      { key: 'Whole Blood', sub: 'CPDA-1 // 35d Shelf', icon: 'water_drop' },
+                      { key: 'PRBC', sub: 'Packed Cells // 42d', icon: 'science' },
+                      { key: 'Platelets', sub: 'Agitated 22°C // 5d', icon: 'grain' },
+                      { key: 'FFP', sub: '-18°C Deep Frost', icon: 'ac_unit' },
+                    ].map((comp) => {
+                      const isSelected = newReq.component === comp.key;
+                      return (
+                        <button
+                          key={comp.key}
+                          type="button"
+                          onClick={() => setNewReq({ ...newReq, component: comp.key })}
+                          className={`p-2.5 rounded border text-left transition-all ${
+                            isSelected
+                              ? 'bg-[#eff4ff] border-[#991b1b] ring-1 ring-[#991b1b]'
+                              : 'bg-white border-[#cbd5e1] hover:border-slate-400'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between text-[#991b1b]">
+                            <span className="material-symbols-outlined text-base">
+                              {comp.icon}
+                            </span>
+                            <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-[#991b1b]' : 'bg-slate-300'}`}></span>
+                          </div>
+                          <div className="font-semibold text-xs text-[#0d1c2f] mt-1">
+                            {comp.key}
+                          </div>
+                          <div className="text-[10px] text-[#565e74] font-mono mt-0.5">
+                            {comp.sub}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Units Counter & Stepper */}
+                <div className="bg-[#eff4ff] p-3 rounded border border-[#cbd5e1] flex items-center justify-between gap-3">
+                  <div>
+                    <span className="font-semibold text-xs text-[#0d1c2f] block">
+                      Units Required (Units / Pints)
+                    </span>
+                    <span className="text-[11px] text-[#565e74]">
+                      Emergency initial trauma draw typically 2–4 units
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-white border border-[#cbd5e1] rounded p-1">
+                    <button
+                      type="button"
+                      onClick={() => setNewReq({ ...newReq, units_required: Math.max(1, newReq.units_required - 1) })}
+                      className="w-7 h-7 rounded flex items-center justify-center text-slate-700 hover:bg-slate-100 font-bold"
+                    >
+                      -
+                    </button>
+                    <span className="w-8 text-center font-mono font-bold text-base text-[#991b1b]">
+                      {newReq.units_required}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setNewReq({ ...newReq, units_required: Math.min(10, newReq.units_required + 1) })}
+                      className="w-7 h-7 rounded flex items-center justify-center text-slate-700 hover:bg-slate-100 font-bold"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Clinical Indication & Notes</label>
+              {/* Section 3: Clinical Diagnosis & Doctor's Notes */}
+              <div className="space-y-2 pt-2">
+                <label className="block text-[11px] font-semibold text-[#0d1c2f]">
+                  Clinical Diagnosis &amp; Transfusion Indication Notes
+                </label>
                 <textarea
                   rows={2}
+                  required
                   value={newReq.doctor_notes}
                   onChange={(e) => setNewReq({ ...newReq, doctor_notes: e.target.value })}
-                  className="w-full border border-slate-300 rounded px-2.5 py-1.5"
+                  placeholder="e.g. Acute gastrointestinal bleed. Emergency bedside uncrossmatched O- transfusion requested."
+                  className="w-full border border-[#cbd5e1] rounded px-3 py-2 text-xs text-[#0d1c2f] focus:border-[#991b1b] focus:ring-1 focus:ring-[#991b1b]"
                 />
               </div>
 
-              <div className="pt-3 border-t border-slate-200 flex items-center justify-end space-x-2">
+              {/* Modal Actions */}
+              <div className="pt-3 border-t border-[#cbd5e1] flex items-center justify-end space-x-3">
                 <button
                   type="button"
                   onClick={() => setShowNewRequestModal(false)}
@@ -959,11 +1122,19 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn-primary text-xs">
-                  Issue Requisition
+                <button
+                  type="submit"
+                  className="btn-primary text-xs py-2 px-4 shadow-sm"
+                >
+                  <span className="material-symbols-outlined text-sm">
+                    send
+                  </span>
+                  <span>Issue Requisition &amp; Run Match</span>
                 </button>
               </div>
+
             </form>
+
           </div>
         </div>
       )}
