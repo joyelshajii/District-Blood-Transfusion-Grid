@@ -386,110 +386,230 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
 
         </div>
 
-        {/* Right Column: Simulated Volunteer Mobile Screen (7 Cols) */}
+        {/* Right Column: Simulated Volunteer Mobile Screen (Design: 3._donor_alert_decision_portal) */}
         <div className="lg:col-span-7 space-y-4">
           
           {dispatchData ? (
-            <div className="workbench-panel border-red-200/90 p-5 space-y-5">
+            <div className="workbench-panel p-5 sm:p-6 space-y-5 border border-[#cbd5e1] relative overflow-hidden">
               
-              {/* Alert Envelope Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-red-700 text-white rounded flex items-center justify-center font-bold font-mono text-sm shadow-xs">
+              {/* STAT Requisition Protocol Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#cbd5e1] gap-3">
+                <div className="flex items-start sm:items-center space-x-3">
+                  <div className="p-2.5 bg-[#fef2f2] text-[#991b1b] rounded-lg border border-[#fecaca] flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-2xl">priority_high</span>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-headline font-bold text-sm sm:text-base text-[#0d1c2f] tracking-tight">
+                        STAT Blood Requisition Protocol
+                      </span>
+                      <span className="px-2 py-0.5 bg-[#991b1b] text-white font-mono text-[10px] font-bold rounded uppercase tracking-wider">
+                        Priority 1 Active
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#565e74] mt-0.5 font-mono">
+                      Token: {dispatchData.token.slice(0, 16)}... &bull; District Registry 04
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 bg-[#f8f9ff] px-3 py-1.5 rounded-lg border border-[#cbd5e1] self-start sm:self-center">
+                  <div className="w-8 h-8 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#991b1b] font-headline font-bold text-xs">
                     {dispatchData.blood_group_required}
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">
-                      Emergency Blood Donation Request
-                    </h3>
-                    <div className="text-xs text-slate-500 font-mono">
-                      Token: {dispatchData.token.slice(0, 16)}...
+                    <span className="font-bold text-xs text-[#0d1c2f] block font-mono">{dispatchData.donor_code_name}</span>
+                    <span className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                      Interval Cleared
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* District Verified Match Alert Notice */}
+              <div className="bg-[#eff4ff] border-l-4 border-[#991b1b] rounded-r-lg p-3.5 border-y border-r border-[#cbd5e1] text-xs">
+                <div className="flex items-start gap-2.5">
+                  <span className="material-symbols-outlined text-[#991b1b] text-lg mt-0.5">verified_user</span>
+                  <div>
+                    <h4 className="font-bold text-[#991b1b]">District Verified Match Alert</h4>
+                    <p className="text-[#0d1c2f] text-[11px] mt-0.5 leading-relaxed">
+                      You are receiving this alert because your <strong className="text-[#991b1b]">{dispatchData.blood_group_required}</strong> blood group matches an urgent clinical demand and you have completed your mandatory statutory donation interval.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Emergency Requisition Details Bento Grid */}
+              <div className="bg-[#f8f9ff] rounded-lg border border-[#cbd5e1] p-4 space-y-3 relative overflow-hidden">
+                <div className="flex items-center gap-2 pb-2 border-b border-[#cbd5e1]">
+                  <span className="material-symbols-outlined text-[#991b1b] text-lg">local_hospital</span>
+                  <h3 className="font-headline font-bold text-xs text-[#0d1c2f] uppercase tracking-wider">
+                    Emergency Requisition Details
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  {/* Facility Card */}
+                  <div className="sm:col-span-2 bg-white p-3 rounded border border-[#cbd5e1]">
+                    <span className="text-[10px] font-mono font-bold text-[#565e74] uppercase tracking-wider block">
+                      Receiving Facility &amp; Unit
+                    </span>
+                    <div className="flex items-center justify-between mt-1">
+                      <span className="font-headline font-bold text-sm text-[#0d1c2f]">{dispatchData.hospital_name}</span>
+                      <span className="px-2 py-0.5 bg-[#991b1b] text-white text-[10px] font-bold rounded">
+                        Trauma Wing
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#565e74] mt-0.5 flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-[#565e74]" />
+                      <span>{dispatchData.hospital_taluk}, Ernakulam Sector</span>
+                    </p>
+                  </div>
+
+                  {/* Proximity Card */}
+                  <div className="bg-white p-3 rounded border border-[#cbd5e1]">
+                    <span className="text-[10px] font-mono font-bold text-[#565e74] uppercase tracking-wider block">
+                      Proximity / Travel
+                    </span>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="font-headline font-bold text-xl text-[#0d1c2f] font-mono">{dispatchData.distance_km}</span>
+                      <span className="text-xs text-[#565e74]">km away</span>
+                    </div>
+                    <p className="text-[11px] text-[#565e74] mt-1 flex items-center gap-1">
+                      <Navigation className="w-3 h-3 text-[#991b1b]" />
+                      <span>Estimated ~15–25m drive</span>
+                    </p>
+                  </div>
+
+                  {/* Urgency Card */}
+                  <div className="bg-white p-3 rounded border border-[#cbd5e1]">
+                    <span className="text-[10px] font-mono font-bold text-[#565e74] uppercase tracking-wider block">
+                      Time Sensitivity
+                    </span>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="font-headline font-bold text-xl text-[#991b1b]">{dispatchData.urgency_level}</span>
+                    </div>
+                    <p className="text-[11px] text-[#991b1b] font-medium mt-1 flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      <span>Required for immediate transfusion</span>
+                    </p>
+                  </div>
+
+                  {/* Blood Group Matrix Card */}
+                  <div className="bg-white p-3 rounded border border-[#cbd5e1] flex items-center gap-3">
+                    <div className="w-12 h-12 rounded bg-[#991b1b] text-white flex flex-col items-center justify-center font-bold shrink-0 shadow-2xs">
+                      <span className="text-base leading-none font-headline">{dispatchData.blood_group_required}</span>
+                      <span className="text-[8px] uppercase tracking-tighter">Match</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-[#565e74] uppercase tracking-wider block">Target Specimen</span>
+                      <span className="font-bold text-xs text-[#0d1c2f] block">{dispatchData.component}</span>
+                      <span className="text-[10px] text-[#565e74]">Direct crossmatch candidate</span>
+                    </div>
+                  </div>
+
+                  {/* Units Required Card */}
+                  <div className="bg-white p-3 rounded border border-[#cbd5e1] flex items-center gap-3">
+                    <div className="w-12 h-12 rounded bg-[#eff4ff] border border-[#cbd5e1] text-[#0d1c2f] flex flex-col items-center justify-center font-bold shrink-0">
+                      <span className="text-lg leading-none font-mono text-[#991b1b]">{dispatchData.units_required}</span>
+                      <span className="text-[8px] uppercase tracking-wider text-[#565e74]">Units</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-[#565e74] uppercase tracking-wider block">Volume Required</span>
+                      <span className="font-bold text-xs text-[#0d1c2f] block">{dispatchData.units_required} Units Requested</span>
+                      <span className="text-[10px] text-[#565e74]">For emergency clinical reserve</span>
                     </div>
                   </div>
                 </div>
 
-                <span
-                  className={`badge ${
-                    dispatchData.urgency_level === 'Emergency' ? 'badge-emergency' : 'badge-critical'
-                  }`}
-                >
-                  {dispatchData.urgency_level}
-                </span>
-              </div>
-
-              {/* Case Medical Need Details */}
-              <div className="bg-slate-50 p-4 rounded border border-slate-200 space-y-2.5 text-xs">
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500 font-medium">Requesting Hospital:</span>
-                  <span className="font-bold text-slate-900">{dispatchData.hospital_name}</span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500 font-medium">Location &amp; Distance:</span>
-                  <span className="text-slate-800 font-medium flex items-center space-x-1">
-                    <MapPin className="w-3.5 h-3.5 text-slate-500" />
-                    <span>{dispatchData.hospital_taluk} ({dispatchData.distance_km} km away)</span>
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500 font-medium">Component &amp; Units:</span>
-                  <span className="font-bold text-red-700 font-mono">
-                    {dispatchData.units_required} Unit(s) of {dispatchData.blood_group_required} ({dispatchData.component})
-                  </span>
-                </div>
-
-                <div className="pt-2 border-t border-slate-200 text-slate-700 text-[11px] leading-relaxed">
-                  <strong>Clinical Case Note:</strong> {dispatchData.doctor_notes}
+                {/* Doctor's Case Indication */}
+                <div className="bg-white p-3 rounded border border-[#cbd5e1] text-xs">
+                  <span className="font-semibold text-[#0d1c2f]">Attending Physician Note:</span>{' '}
+                  <span className="text-[#565e74] italic">{dispatchData.doctor_notes}</span>
                 </div>
               </div>
 
-              {/* TOKENIZED PRIVACY SEAL BANNER */}
-              <div className="bg-slate-900 text-white p-4 rounded border border-slate-800 space-y-2 text-xs">
-                <div className="flex items-center space-x-2 text-emerald-400 font-bold">
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>Tokenized Privacy Lock Active (SC-12 Requirement)</span>
-                </div>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
-                  The hospital coordinator only sees your anonymized identifier{' '}
-                  <span className="font-mono text-white bg-slate-800 px-1.5 py-0.5 rounded border border-slate-700">
-                    {dispatchData.donor_code_name}
-                  </span>
-                  . Your telephone number and legal identity are completely concealed until you tap "Accept &amp; Share Contact". If you decline, zero data is ever shared.
-                </p>
-              </div>
-
-              {/* Response Decision Flow */}
-              {responseStatus === 'ACCEPTED' ? (
-                <div className="p-4 bg-emerald-50/80 rounded border border-emerald-300 text-xs space-y-3">
-                  <div className="flex items-center space-x-2 text-emerald-950 font-bold">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-700" />
-                    <span>Donation Accepted &bull; Digital Transfusion Voucher Issued</span>
+              {/* Simulated Route & Priority Parking Schematic Widget */}
+              <div className="bg-white rounded-lg border border-[#cbd5e1] overflow-hidden shadow-2xs text-xs">
+                <div className="p-3 bg-[#eff4ff] border-b border-[#cbd5e1] flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 font-bold text-[#0d1c2f]">
+                    <span className="material-symbols-outlined text-sm text-[#991b1b]">explore</span>
+                    <span>Arrival &amp; STAT Fast-Track Protocol</span>
                   </div>
-                  <p className="text-slate-700 text-xs">
-                    Your contact number has been securely unmasked to the Blood Bank coordinator at{' '}
-                    <strong>{dispatchData.hospital_name}</strong>.
-                  </p>
+                  <span className="font-mono text-[10px] text-[#565e74]">TRAUMA BAY 104-B</span>
+                </div>
+                <div className="relative h-28 bg-[#0d1c2f] overflow-hidden flex items-center justify-between px-6">
+                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-2.5 py-1.5 rounded border border-white/20 text-white font-mono text-[11px]">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>Your Location</span>
+                  </div>
+                  <div className="h-0.5 flex-1 mx-4 bg-gradient-to-r from-emerald-400 via-amber-300 to-[#991b1b] border-dashed"></div>
+                  <div className="flex items-center gap-2 bg-[#991b1b] text-white px-3 py-1.5 rounded-lg border border-white/20 font-mono text-[11px] shadow-sm">
+                    <span className="material-symbols-outlined text-sm">local_hospital</span>
+                    <span>{dispatchData.hospital_name.split(' ')[0]} ETU</span>
+                  </div>
+                </div>
+                <div className="p-3 bg-[#f8f9ff] text-[11px] text-[#565e74] flex items-center justify-between">
+                  <span>Fast-Track Intercom PIN: <strong className="font-mono text-[#0d1c2f]">#4082</strong></span>
+                  <span className="text-emerald-700 font-semibold">Priority Ambulance Gate Clearance</span>
+                </div>
+              </div>
+
+              {/* Strict Medical Privacy Masking Card (HIPAA / DPDPA) */}
+              <div className="bg-[#eff4ff] rounded-lg border border-[#cbd5e1] p-3.5 space-y-1.5 text-xs">
+                <div className="flex items-center gap-2">
+                  <div className="p-1.5 bg-white rounded text-[#0d1c2f] border border-[#cbd5e1]">
+                    <Lock className="w-3.5 h-3.5 text-[#047857]" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[#0d1c2f] flex items-center gap-2">
+                      Strict Cryptographic Privacy Masking Active
+                      <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white text-[#565e74] border border-[#cbd5e1]">
+                        DPDPA 2023 TIER-3
+                      </span>
+                    </h4>
+                    <p className="text-[11px] text-[#565e74] leading-relaxed">
+                      Your phone number and identity remain <strong className="text-[#0d1c2f]">COMPLETELY HIDDEN</strong> from the hospital. Contact details are only transmitted to the verified transfusion desk if you explicitly click <strong className="text-[#991b1b]">Accept &amp; Commit to Donate</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decision Protocol Hub */}
+              {responseStatus === 'ACCEPTED' ? (
+                <div className="p-5 bg-[#f0fdf4] rounded-lg border-2 border-[#047857] text-xs space-y-3.5 shadow-sm">
+                  <div className="flex items-center space-x-2.5 text-[#00402d] font-bold">
+                    <div className="w-8 h-8 rounded-full bg-[#047857] text-white flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-headline font-bold text-sm">Commitment Authenticated &bull; Fast-Track Issued</h4>
+                      <p className="text-[11px] text-[#00402d] font-normal">
+                        Contact unmasked exclusively to the Blood Bank Desk at <strong>{dispatchData.hospital_name}</strong>.
+                      </p>
+                    </div>
+                  </div>
 
                   <div className="bg-white p-3.5 rounded border border-emerald-200 text-xs space-y-1.5 font-mono">
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Hospital Coordinator Desk:</span>
-                      <span className="font-bold text-slate-900">+91 484 2361250</span>
+                      <span className="text-slate-500">Fast-Track Pass Token:</span>
+                      <span className="font-bold text-[#991b1b]">#PASS-{dispatchData.token.slice(0, 8).toUpperCase()}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Expected Arrival Window:</span>
+                      <span className="text-slate-500">Confirmed Window:</span>
                       <span className="font-bold text-emerald-800">{selectedEta}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Pass Reference:</span>
-                      <span className="text-slate-700">{dispatchData.token.slice(0, 8).toUpperCase()}</span>
+                      <span className="text-slate-500">Gate Intercom Access PIN:</span>
+                      <span className="font-bold text-[#0d1c2f]">4082</span>
                     </div>
                   </div>
 
-                  <div className="pt-2 flex items-center space-x-3">
+                  <div className="pt-1 flex items-center space-x-3">
                     <button
                       onClick={onNavigateToHospital}
-                      className="btn-primary text-xs flex items-center space-x-1.5"
+                      className="btn-primary text-xs py-2 px-4 flex items-center space-x-1.5 shadow-xs"
                     >
                       <span>Return to Hospital View to verify unmasked contact</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -497,27 +617,39 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
                   </div>
                 </div>
               ) : responseStatus === 'DECLINED' ? (
-                <div className="p-4 bg-slate-100 rounded border border-slate-200 text-xs space-y-2">
-                  <div className="flex items-center space-x-2 text-slate-800 font-bold">
-                    <XCircle className="w-5 h-5 text-slate-600" />
-                    <span>Request Declined</span>
+                <div className="p-4 bg-[#f8f9ff] rounded-lg border border-[#cbd5e1] text-xs space-y-2">
+                  <div className="flex items-center space-x-2 text-[#0d1c2f] font-bold">
+                    <XCircle className="w-5 h-5 text-slate-500" />
+                    <span>Request Safely Deferred</span>
                   </div>
-                  <p className="text-slate-600 text-xs leading-relaxed">
-                    Your contact information was kept completely private. The dispatch engine has automatically routed the alert to the next qualified candidate in the district.
+                  <p className="text-[#565e74] text-xs leading-relaxed">
+                    Your contact information remained strictly confidential. The dispatch engine has re-routed the notification to the next qualified candidate without penalty.
                   </p>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-4 pt-1">
                   
+                  {/* Response Window Timer */}
+                  <div className="p-2.5 bg-[#fef2f2] border border-[#fecaca] rounded flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-1.5 text-[#991b1b] font-semibold">
+                      <Clock className="w-4 h-4 animate-pulse" />
+                      <span>Response Window Closing:</span>
+                    </div>
+                    <span className="font-mono font-bold text-[#991b1b] text-sm">
+                      00:18:42 STAT
+                    </span>
+                  </div>
+
+                  {/* ETA Selector & Donor Note */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Estimated Arrival Window
+                      <label className="block font-semibold text-[#0d1c2f] mb-1">
+                        Select Estimated Arrival Window:
                       </label>
                       <select
                         value={selectedEta}
                         onChange={(e) => setSelectedEta(e.target.value)}
-                        className="w-full border border-slate-300 rounded px-2.5 py-1.5 bg-white text-slate-900 font-medium"
+                        className="w-full border border-[#cbd5e1] rounded px-3 py-2 bg-white text-[#0d1c2f] font-medium focus:border-[#991b1b]"
                       >
                         <option value="15 to 25 mins">Within 15 to 25 mins</option>
                         <option value="25 to 35 mins">Within 25 to 35 mins</option>
@@ -527,36 +659,42 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Optional Note for Blood Bank
+                      <label className="block font-semibold text-[#0d1c2f] mb-1">
+                        Transit Note for Receiving Bay:
                       </label>
                       <input
                         type="text"
                         value={donorNote}
                         onChange={(e) => setDonorNote(e.target.value)}
-                        placeholder="e.g. Taking private vehicle"
-                        className="w-full border border-slate-300 rounded px-2.5 py-1.5 text-xs"
+                        placeholder="e.g. Can arrive in 20 mins by car"
+                        className="w-full border border-[#cbd5e1] rounded px-3 py-2 text-xs focus:border-[#991b1b]"
                       />
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3 pt-2">
+                  {/* Accept / Decline Triggers */}
+                  <div className="space-y-2.5 pt-1">
                     <button
                       onClick={() => handleRespond('ACCEPT')}
                       disabled={loading}
-                      className="btn-success text-xs py-2 px-4 flex items-center space-x-1.5 flex-1"
+                      className="w-full py-3 px-4 bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-headline font-bold text-sm rounded-lg shadow-sm hover:shadow active:scale-[0.99] transition-all flex items-center justify-center gap-2"
                     >
-                      <CheckCircle2 className="w-4 h-4" />
-                      <span>Accept &amp; Share Contact</span>
+                      <CheckCircle2 className="w-5 h-5" />
+                      <span>Accept &amp; Commit to Donate (Unmask Contact)</span>
                     </button>
+
+                    <div className="relative py-1 flex items-center justify-center">
+                      <div className="w-full border-t border-[#cbd5e1]"></div>
+                      <span className="absolute bg-white px-2 text-[10px] font-mono text-[#565e74]">OR</span>
+                    </div>
 
                     <button
                       onClick={() => handleRespond('DECLINE')}
                       disabled={loading}
-                      className="btn-danger text-xs py-2 px-3 flex items-center space-x-1"
+                      className="w-full py-2 px-3 bg-white hover:bg-[#f8f9ff] text-[#565e74] hover:text-[#0d1c2f] text-xs font-semibold rounded border border-[#cbd5e1] transition-colors flex items-center justify-center gap-1.5"
                     >
-                      <XCircle className="w-4 h-4" />
-                      <span>Decline</span>
+                      <XCircle className="w-4 h-4 text-slate-400" />
+                      <span>Decline (Not Available Today &bull; Keep Private)</span>
                     </button>
                   </div>
 
@@ -567,22 +705,22 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
           ) : (
             /* Empty State Explaining How to Test */
             <div className="workbench-panel text-center py-16 px-4 space-y-3">
-              <div className="w-10 h-10 bg-slate-100 text-slate-600 rounded flex items-center justify-center mx-auto">
-                <Smartphone className="w-5 h-5" />
+              <div className="w-12 h-12 bg-[#eff4ff] text-[#991b1b] rounded-lg flex items-center justify-center mx-auto border border-[#cbd5e1]">
+                <Smartphone className="w-6 h-6" />
               </div>
-              <div className="max-w-md mx-auto space-y-1">
-                <h3 className="text-sm font-bold text-slate-900">
+              <div className="max-w-md mx-auto space-y-1.5">
+                <h3 className="font-headline font-bold text-sm text-[#0d1c2f]">
                   No Active Invitation Selected
                 </h3>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  To test the interactive cycle, open the <strong>Hospital Dispatch</strong> tab, run the matching engine on any open requisition, and click <strong>Notify</strong> on an eligible candidate.
+                <p className="text-xs text-[#565e74] leading-relaxed">
+                  To test the interactive invitation loop, open the <strong>Command Console</strong> tab, run the matching engine on any open requisition, and click <strong>Notify</strong> on an eligible candidate.
                 </p>
                 <div className="pt-3">
                   <button
                     onClick={onNavigateToHospital}
-                    className="btn-primary text-xs py-1.5 px-3"
+                    className="btn-primary text-xs py-2 px-4 shadow-sm"
                   >
-                    Go to Hospital Dispatch
+                    Go to Command Console
                   </button>
                 </div>
               </div>
