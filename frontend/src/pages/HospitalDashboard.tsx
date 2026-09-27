@@ -165,58 +165,61 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
       
       {/* Retractable Evaluation & Examiner Drawer */}
       {evaluationDrawerOpen && (
-        <div className="bg-slate-900 text-slate-200 border border-slate-800 rounded p-4 shadow-sm transition-all">
-          <div className="flex items-start justify-between gap-4">
-            <div className="space-y-2 max-w-4xl">
-              <div className="flex items-center space-x-2">
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-700 text-white uppercase tracking-wider">
-                  ANAVANDI 2026 Evaluation Protocol
+        <div className="bg-[#0d1c2f] text-slate-200 border border-slate-800 rounded-lg p-4 sm:p-5 shadow-sm transition-all relative overflow-hidden">
+          <div className="absolute top-0 left-0 bottom-0 w-1 bg-[#991b1b]"></div>
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
+            <div className="space-y-2.5 max-w-4xl pl-2">
+              <div className="flex items-center space-x-2.5 flex-wrap">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#991b1b] text-white uppercase tracking-wider border border-[#760009]">
+                  ANAVANDI 2026 // SC-12 PROTOCOL
                 </span>
-                <span className="text-xs font-semibold text-white">Challenge SC-12: District Blood Donor Matching</span>
+                <span className="text-xs font-headline font-bold text-white tracking-wide">
+                  District Blood Donor Matching &bull; Direct Matching &amp; Consent Unmasking
+                </span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed">
-                <strong>The Core Problem Solved:</strong> Broad WhatsApp broadcast chains cause severe donor fatigue, disturb volunteers who donated only weeks ago, and expose phone numbers to scraping. This system solves SC-12 by running an algorithmic compatibility filter that strictly enforces 90-day (male) and 120-day (female) clinical recovery intervals, radial proximity, and keeps volunteer contact details 100% locked until explicit acceptance.
+                <strong className="text-white">The Core Problem Solved:</strong> Broad WhatsApp broadcast chains cause severe donor fatigue, disturb volunteers who donated only weeks ago, and expose personal numbers to public scraping. This system solves SC-12 by running an algorithmic compatibility filter that strictly enforces 90-day (male) and 120-day (female) clinical recovery intervals, radial proximity, and keeps volunteer contact details 100% locked until explicit acceptance.
               </p>
-              <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-slate-400">
-                <span className="flex items-center space-x-1">
+              <div className="flex flex-wrap items-center gap-2.5 pt-1 text-[11px] text-slate-400">
+                <span className="flex items-center space-x-1.5 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>1. Hospital Creates Requisition</span>
+                  <span className="text-slate-200 font-medium">1. Hospital Requisition</span>
                 </span>
-                <span className="text-slate-600">&bull;</span>
-                <span className="flex items-center space-x-1">
+                <span className="text-slate-600">&rarr;</span>
+                <span className="flex items-center space-x-1.5 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>2. Multi-Factor Interval Filter</span>
+                  <span className="text-slate-200 font-medium">2. Multi-Factor Interval Filter</span>
                 </span>
-                <span className="text-slate-600">&bull;</span>
-                <span className="flex items-center space-x-1">
+                <span className="text-slate-600">&rarr;</span>
+                <span className="flex items-center space-x-1.5 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>3. Anonymized Dispatch Token</span>
+                  <span className="text-slate-200 font-medium">3. Anonymized Dispatch Token</span>
                 </span>
-                <span className="text-slate-600">&bull;</span>
-                <span className="flex items-center space-x-1">
+                <span className="text-slate-600">&rarr;</span>
+                <span className="flex items-center space-x-1.5 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>4. Donor Accepts on Portal</span>
+                  <span className="text-slate-200 font-medium">4. Donor Accepts on Portal</span>
                 </span>
-                <span className="text-slate-600">&bull;</span>
-                <span className="flex items-center space-x-1">
+                <span className="text-slate-600">&rarr;</span>
+                <span className="flex items-center space-x-1.5 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>5. Contact Unmasks Exclusively to Desk</span>
+                  <span className="text-slate-200 font-medium">5. Desk Contact Unmasking</span>
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center space-x-2 shrink-0">
+            <div className="flex items-center space-x-2 shrink-0 self-end lg:self-center">
               <button
                 onClick={() => onNavigateToDonorSimulator()}
-                className="btn-primary text-xs py-1.5 px-3 flex items-center space-x-1.5"
+                className="btn-primary text-xs py-2 px-3.5 shadow-sm"
               >
-                <ShieldCheck className="w-3.5 h-3.5" />
+                <ShieldCheck className="w-4 h-4" />
                 <span>Test Volunteer Simulator</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => setEvaluationDrawerOpen(false)}
-                className="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800"
+                className="p-1.5 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
                 title="Dismiss guide"
               >
                 <X className="w-4 h-4" />
@@ -226,76 +229,76 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
         </div>
       )}
 
-      {/* Integrated Operations HUD Bar */}
+      {/* Integrated Operations HUD Bar - Clinical Precision Telemetry */}
       {stats && (
-        <div className="workbench-panel grid grid-cols-2 lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-slate-200">
+        <div className="workbench-panel grid grid-cols-2 lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-[#cbd5e1] overflow-hidden">
           
-          <div className="hud-cell">
-            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+          <div className="hud-cell bg-white hover:bg-[#f8f9ff] transition-colors">
+            <div className="text-[11px] font-bold text-[#565e74] uppercase tracking-wider">
               Active Requisitions
             </div>
             <div className="flex items-baseline space-x-2 mt-1">
-              <span className="text-2xl font-bold font-mono text-slate-900 tabular-nums">
+              <span className="text-2xl font-bold font-mono text-[#0d1c2f] tabular-nums">
                 {stats.active_requests}
               </span>
-              <span className="text-[11px] text-red-700 font-semibold flex items-center">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-600 inline-block mr-1 animate-pulse"></span>
+              <span className="text-[11px] text-[#991b1b] font-semibold flex items-center">
+                <span className="w-2 h-2 rounded-full bg-[#991b1b] inline-block mr-1 animate-pulse"></span>
                 In Triage
               </span>
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">Hospital urgent cases</div>
+            <div className="text-[11px] text-[#565e74] mt-0.5 font-medium">Hospital urgent cases</div>
           </div>
 
-          <div className="hud-cell">
-            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+          <div className="hud-cell bg-white hover:bg-[#f8f9ff] transition-colors">
+            <div className="text-[11px] font-bold text-[#565e74] uppercase tracking-wider">
               District Registry
             </div>
             <div className="flex items-baseline space-x-2 mt-1">
-              <span className="text-2xl font-bold font-mono text-slate-900 tabular-nums">
+              <span className="text-2xl font-bold font-mono text-[#0d1c2f] tabular-nums">
                 {stats.total_registered_donors}
               </span>
-              <span className="text-[11px] text-slate-500 font-medium">Volunteers</span>
+              <span className="text-[11px] text-[#565e74] font-medium">Volunteers</span>
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">Ernakulam sector database</div>
+            <div className="text-[11px] text-[#565e74] mt-0.5 font-medium">Ernakulam sector database</div>
           </div>
 
-          <div className="hud-cell">
-            <div className="text-[11px] font-semibold text-emerald-800 uppercase tracking-wider">
+          <div className="hud-cell bg-white hover:bg-[#f8f9ff] transition-colors">
+            <div className="text-[11px] font-bold text-[#047857] uppercase tracking-wider">
               Clinically Eligible Today
             </div>
             <div className="flex items-baseline space-x-2 mt-1">
-              <span className="text-2xl font-bold font-mono text-emerald-800 tabular-nums">
+              <span className="text-2xl font-bold font-mono text-[#047857] tabular-nums">
                 {stats.eligible_today_donors}
               </span>
-              <span className="text-[11px] text-emerald-700 font-medium">Post-Interval</span>
+              <span className="text-[11px] text-[#047857] font-semibold">Post-Interval</span>
             </div>
-            <div className="text-[11px] text-emerald-700 mt-0.5">Cleared 90d/120d cooldown</div>
+            <div className="text-[11px] text-[#047857] mt-0.5 font-medium">Cleared 90d/120d cooldown</div>
           </div>
 
-          <div className="hud-cell">
-            <div className="text-[11px] font-semibold text-amber-800 uppercase tracking-wider">
+          <div className="hud-cell bg-white hover:bg-[#f8f9ff] transition-colors">
+            <div className="text-[11px] font-bold text-[#b45309] uppercase tracking-wider">
               Protected Cooldown
             </div>
             <div className="flex items-baseline space-x-2 mt-1">
-              <span className="text-2xl font-bold font-mono text-amber-800 tabular-nums">
+              <span className="text-2xl font-bold font-mono text-[#b45309] tabular-nums">
                 {stats.active_cooldown_donors}
               </span>
-              <span className="text-[11px] text-amber-700 font-medium">Protected</span>
+              <span className="text-[11px] text-[#b45309] font-semibold">Protected</span>
             </div>
-            <div className="text-[11px] text-amber-700 mt-0.5">Excluded from notifications</div>
+            <div className="text-[11px] text-[#b45309] mt-0.5 font-medium">Excluded from notifications</div>
           </div>
 
-          <div className="hud-cell col-span-2 lg:col-span-1">
-            <div className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">
-              Spam Messages Prevented
+          <div className="hud-cell col-span-2 lg:col-span-1 bg-white hover:bg-[#f8f9ff] transition-colors">
+            <div className="text-[11px] font-bold text-[#0d1c2f] uppercase tracking-wider">
+              Spam Messages Blocked
             </div>
             <div className="flex items-baseline space-x-2 mt-1">
-              <span className="text-2xl font-bold font-mono text-slate-900 tabular-nums">
+              <span className="text-2xl font-bold font-mono text-[#0d1c2f] tabular-nums">
                 {stats.prevented_spam_alerts}
               </span>
-              <span className="text-[11px] text-slate-600 font-medium">Blocked</span>
+              <span className="text-[11px] text-emerald-700 font-semibold">Protected</span>
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">Zero WhatsApp broadcast blast</div>
+            <div className="text-[11px] text-[#565e74] mt-0.5 font-medium">Zero broadcast fatigue</div>
           </div>
 
         </div>
@@ -304,21 +307,21 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
       {/* Action Notification Toast */}
       {actionMessage && (
         <div
-          className={`p-3 rounded border text-xs font-medium flex items-center justify-between shadow-xs ${
+          className={`p-3.5 rounded-lg border text-xs font-medium flex items-center justify-between shadow-xs ${
             actionMessage.type === 'success'
-              ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
+              ? 'bg-[#eff4ff] text-[#0d1c2f] border-[#991b1b]/40'
               : actionMessage.type === 'error'
-              ? 'bg-red-50 text-red-900 border-red-200'
-              : 'bg-slate-100 text-slate-900 border-slate-300'
+              ? 'bg-[#fef2f2] text-[#991b1b] border-[#fecaca]'
+              : 'bg-[#eff4ff] text-[#0d1c2f] border-[#cbd5e1]'
           }`}
         >
-          <div className="flex items-center space-x-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-            <span>{actionMessage.text}</span>
+          <div className="flex items-center space-x-2.5">
+            <CheckCircle2 className="w-4 h-4 text-[#047857] shrink-0" />
+            <span className="font-medium">{actionMessage.text}</span>
           </div>
           <button
             onClick={() => setActionMessage(null)}
-            className="text-slate-600 hover:text-slate-900 text-xs font-semibold ml-4 underline"
+            className="text-[#991b1b] hover:underline text-xs font-semibold ml-4"
           >
             Dismiss
           </button>
@@ -332,17 +335,19 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
         <div className="lg:col-span-4 workbench-panel flex flex-col h-[780px] overflow-hidden">
           
           {/* Triage Search & Urgency Chips Bar */}
-          <div className="p-3.5 border-b border-slate-200 bg-slate-50/70 space-y-2.5">
+          <div className="p-3.5 border-b border-[#cbd5e1] bg-[#f8f9ff] space-y-2.5">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-1.5">
-                <Activity className="w-4 h-4 text-red-700" />
-                <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+              <div className="flex items-center space-x-2">
+                <span className="material-symbols-outlined text-base text-[#991b1b]">
+                  list_alt
+                </span>
+                <span className="text-xs font-bold text-[#0d1c2f] uppercase tracking-wider font-headline">
                   Requisitions Queue ({requests.length})
                 </span>
               </div>
               <button
                 onClick={() => setShowNewRequestModal(true)}
-                className="btn-primary text-xs py-1 px-2.5 flex items-center space-x-1"
+                className="btn-primary text-xs py-1 px-2.5 shadow-xs"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>New Case</span>
@@ -350,38 +355,43 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
             </div>
 
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-[#565e74] absolute left-2.5 top-2.5" />
               <input
                 type="text"
                 placeholder="Filter by case, hospital, group..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-slate-900"
+                className="w-full text-xs pl-8 pr-3 py-1.5 bg-white border border-[#cbd5e1] rounded text-[#0d1c2f] placeholder:text-[#565e74] focus:outline-none focus:border-[#991b1b] focus:ring-1 focus:ring-[#991b1b]"
               />
             </div>
 
             {/* Urgency Filter Chips */}
-            <div className="flex items-center space-x-1 text-[11px]">
-              {['ALL', 'EMERGENCY', 'CRITICAL', 'ELECTIVE'].map((u) => (
-                <button
-                  key={u}
-                  onClick={() => setUrgencyFilter(u)}
-                  className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-colors ${
-                    urgencyFilter === u
-                      ? 'bg-slate-900 text-white'
-                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-                  }`}
-                >
-                  {u}
-                </button>
-              ))}
+            <div className="flex items-center space-x-1.5 text-[11px]">
+              {['ALL', 'EMERGENCY', 'CRITICAL', 'ELECTIVE'].map((u) => {
+                const isActive = urgencyFilter === u;
+                return (
+                  <button
+                    key={u}
+                    onClick={() => setUrgencyFilter(u)}
+                    className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-all ${
+                      isActive
+                        ? u === 'EMERGENCY'
+                          ? 'bg-[#991b1b] text-white shadow-xs'
+                          : 'bg-[#0d1c2f] text-white shadow-xs'
+                        : 'bg-white text-[#565e74] border border-[#cbd5e1] hover:border-slate-400'
+                    }`}
+                  >
+                    {u}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
           {/* Requisitions Scroll Area */}
-          <div className="flex-1 overflow-y-auto divide-y divide-slate-100 p-1">
+          <div className="flex-1 overflow-y-auto divide-y divide-[#cbd5e1]/60 p-1.5">
             {filteredRequests.length === 0 ? (
-              <div className="p-8 text-center text-slate-500 text-xs">
+              <div className="p-8 text-center text-[#565e74] text-xs">
                 No requisitions matching current filters.
               </div>
             ) : (
@@ -394,16 +404,27 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                   <div
                     key={req.id}
                     onClick={() => setSelectedRequestId(req.id)}
-                    className={`p-3 rounded transition-all cursor-pointer m-1 ${
+                    className={`p-3 rounded-md transition-all cursor-pointer m-1 relative overflow-hidden ${
                       isSelected
-                        ? 'bg-slate-50 border border-slate-900 ring-1 ring-slate-900 shadow-xs'
-                        : 'bg-white hover:bg-slate-50 border border-transparent hover:border-slate-200'
+                        ? 'bg-[#eff4ff] border-2 border-[#991b1b] shadow-xs'
+                        : 'bg-white hover:bg-[#f8f9ff] border border-[#cbd5e1]'
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-2">
+                    {/* Left Priority Bar */}
+                    <div
+                      className={`absolute left-0 top-0 bottom-0 w-1 ${
+                        req.urgency_level === 'Emergency'
+                          ? 'bg-[#991b1b]'
+                          : req.urgency_level === 'Critical'
+                          ? 'bg-amber-600'
+                          : 'bg-slate-400'
+                      }`}
+                    />
+
+                    <div className="flex items-start justify-between gap-2 pl-2">
                       <div>
                         <div className="flex items-center space-x-2">
-                          <span className="font-mono text-xs font-bold text-slate-900">
+                          <span className="font-mono text-xs font-bold text-[#0d1c2f]">
                             {req.case_number}
                           </span>
                           <span
@@ -418,46 +439,46 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                             {req.urgency_level}
                           </span>
                         </div>
-                        <div className="text-xs font-semibold text-slate-800 mt-1 line-clamp-1">
+                        <div className="text-xs font-semibold text-[#0d1c2f] mt-1 line-clamp-1">
                           {req.hospital_name}
                         </div>
-                        <div className="text-[11px] text-slate-500 flex items-center space-x-1 mt-0.5">
-                          <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                        <div className="text-[11px] text-[#565e74] flex items-center space-x-1 mt-0.5">
+                          <MapPin className="w-3 h-3 text-[#565e74] shrink-0" />
                           <span>{req.hospital_taluk}, {req.hospital_district}</span>
                         </div>
                       </div>
 
                       <div className="text-right shrink-0">
-                        <div className="px-2 py-0.5 bg-red-50 text-red-800 border border-red-200 rounded text-xs font-bold">
+                        <div className="px-2 py-0.5 bg-[#991b1b] text-white rounded text-xs font-bold font-headline shadow-xs">
                           {req.blood_group}
                         </div>
-                        <div className="text-[10px] font-mono text-slate-500 mt-1">
+                        <div className="text-[10px] font-mono text-[#565e74] mt-1">
                           {req.units_required} Unit{req.units_required > 1 ? 's' : ''}
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
-                      <span className="text-slate-500">{req.component}</span>
+                    <div className="mt-2.5 pt-2 border-t border-[#cbd5e1]/60 flex items-center justify-between text-[11px] pl-2">
+                      <span className="text-[#565e74] font-medium">{req.component}</span>
                       <span
-                        className={`font-mono font-semibold flex items-center space-x-1 ${
+                        className={`font-mono font-semibold flex items-center space-x-1.5 ${
                           isAccepted
-                            ? 'text-emerald-700'
+                            ? 'text-[#047857]'
                             : isDispatched
                             ? 'text-amber-700'
-                            : 'text-slate-600'
+                            : 'text-[#565e74]'
                         }`}
                       >
                         <span
-                          className={`w-1.5 h-1.5 rounded-full ${
+                          className={`w-2 h-2 rounded-full ${
                             isAccepted
-                              ? 'bg-emerald-600'
+                              ? 'bg-[#047857]'
                               : isDispatched
                               ? 'bg-amber-500 animate-pulse'
                               : 'bg-slate-400'
                           }`}
                         ></span>
-                        <span>{req.status}</span>
+                        <span className="uppercase tracking-wider text-[10px]">{req.status}</span>
                       </span>
                     </div>
                   </div>
