@@ -493,34 +493,44 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
         <div className="lg:col-span-8 space-y-5">
           {selectedRequest ? (
             <>
-              {/* Selected Case Dossier */}
+              {/* Selected Case Dossier (Design: 2._dispatcher_live_matching_console) */}
               <div className="workbench-panel p-4 sm:p-5 space-y-4">
                 
-                {/* Dossier Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200 gap-3">
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <span className="font-mono text-xs font-bold px-2 py-0.5 bg-slate-100 text-slate-700 rounded border border-slate-200">
-                        {selectedRequest.case_number}
+                {/* Dossier Live Emergency Header Banner */}
+                <div className="bg-[#991b1b] text-white p-4 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs border border-[#760009] relative overflow-hidden">
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#760009]"></div>
+                  
+                  <div className="flex items-start sm:items-center space-x-3 pl-1">
+                    <div className="w-10 h-10 rounded bg-[#760009] flex items-center justify-center shrink-0 border border-white/20">
+                      <span className="material-symbols-outlined text-2xl text-white animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>
+                        emergency_heat
                       </span>
-                      <h3 className="text-base font-bold text-slate-900">
-                        {selectedRequest.hospital_name}
-                      </h3>
                     </div>
-                    <p className="text-xs text-slate-600 mt-1">
-                      <strong>Clinical Indication:</strong> {selectedRequest.doctor_notes}
-                    </p>
+                    <div>
+                      <div className="flex items-center space-x-2 flex-wrap">
+                        <span className="font-mono text-xs px-2 py-0.5 rounded bg-black/30 text-white font-bold tracking-wider">
+                          {selectedRequest.case_number}
+                        </span>
+                        <h3 className="font-headline font-bold text-base text-white tracking-tight">
+                          {selectedRequest.hospital_name}
+                        </h3>
+                      </div>
+                      <p className="text-xs text-red-100 mt-1 flex items-center gap-1.5">
+                        <span className="font-semibold text-white">Indication:</span>
+                        <span>{selectedRequest.doctor_notes}</span>
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="flex items-center space-x-3 shrink-0">
-                    <div className="p-2.5 bg-red-50/80 border border-red-200 rounded text-right">
-                      <span className="text-[10px] text-red-800 uppercase tracking-wider block font-semibold">
+                  <div className="flex items-center space-x-2.5 shrink-0 self-end sm:self-center">
+                    <div className="bg-[#760009] border border-white/20 px-3 py-1.5 rounded text-right">
+                      <span className="text-[10px] text-red-200 uppercase tracking-wider block font-semibold">
                         Requisition Demand
                       </span>
-                      <span className="text-base font-bold text-red-800 font-mono">
-                        {selectedRequest.units_required} Units of {selectedRequest.blood_group}
+                      <span className="text-base font-bold text-white font-mono">
+                        {selectedRequest.units_required} Units {selectedRequest.blood_group}
                       </span>
-                      <span className="text-[11px] text-slate-600 block">
+                      <span className="text-[10px] text-red-200 block font-mono">
                         {selectedRequest.component}
                       </span>
                     </div>
@@ -528,14 +538,14 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                 </div>
 
                 {/* Search Perimeter & Engine Toolbar */}
-                <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1 border-t border-[#cbd5e1] pt-3">
                   <div className="flex items-center space-x-2">
-                    <Filter className="w-3.5 h-3.5 text-slate-500" />
-                    <span className="font-semibold text-slate-700">Dispatch Perimeter:</span>
+                    <span className="material-symbols-outlined text-sm text-[#565e74]">near_me</span>
+                    <span className="font-semibold text-[#0d1c2f]">Dispatch Perimeter:</span>
                     <select
                       value={radiusKm}
                       onChange={(e) => setRadiusKm(Number(e.target.value))}
-                      className="border border-slate-300 rounded px-2.5 py-1 bg-white font-medium text-slate-800 focus:outline-none focus:ring-1 focus:ring-slate-900"
+                      className="border border-[#cbd5e1] rounded px-2.5 py-1 bg-white font-medium text-[#0d1c2f] focus:outline-none focus:border-[#991b1b]"
                     >
                       <option value={10}>Within 10 km (Urban Kochi Core)</option>
                       <option value={20}>Within 20 km (Suburban Taluks)</option>
@@ -629,58 +639,58 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                   
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                      <h4 className="text-xs font-bold text-[#0d1c2f] uppercase tracking-wider font-headline">
                         Multi-Factor Algorithmic Audit Rail
                       </h4>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#565e74] mt-0.5">
                         How the matching engine filtered the registry to eliminate WhatsApp broadcast spam:
                       </p>
                     </div>
                   </div>
 
                   {/* Multi-Stage Step Tracker */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                    <div className="p-3 bg-slate-50 rounded border border-slate-200">
-                      <div className="text-[11px] font-semibold text-slate-500">1. District Pool</div>
-                      <div className="text-xl font-bold font-mono text-slate-900 mt-0.5">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                    <div className="p-3 bg-[#eff4ff] rounded border border-[#cbd5e1]">
+                      <div className="text-[11px] font-bold text-[#565e74] uppercase tracking-wider">1. District Pool</div>
+                      <div className="text-xl font-bold font-mono text-[#0d1c2f] mt-0.5">
                         {analysis.total_district_donors}
                       </div>
-                      <div className="text-[10px] text-slate-500">Registered donors</div>
+                      <div className="text-[10px] text-[#565e74]">Registered donors</div>
                     </div>
 
-                    <div className="p-3 bg-red-50/70 rounded border border-red-200">
-                      <div className="text-[11px] font-semibold text-red-800">2. Incompatible ABO/Rh</div>
-                      <div className="text-xl font-bold font-mono text-red-800 mt-0.5">
+                    <div className="p-3 bg-[#fef2f2] rounded border border-[#fecaca]">
+                      <div className="text-[11px] font-bold text-[#991b1b] uppercase tracking-wider">2. Incompatible ABO/Rh</div>
+                      <div className="text-xl font-bold font-mono text-[#991b1b] mt-0.5">
                         -{analysis.blood_incompatible}
                       </div>
-                      <div className="text-[10px] text-red-700">Mismatch deferred</div>
+                      <div className="text-[10px] text-[#991b1b]">Mismatch deferred</div>
                     </div>
 
-                    <div className="p-3 bg-amber-50/70 rounded border border-amber-200">
-                      <div className="text-[11px] font-semibold text-amber-800">3. Cooldown Guard</div>
-                      <div className="text-xl font-bold font-mono text-amber-800 mt-0.5">
+                    <div className="p-3 bg-[#fffbeb] rounded border border-[#fde68a]">
+                      <div className="text-[11px] font-bold text-[#b45309] uppercase tracking-wider">3. Cooldown Guard</div>
+                      <div className="text-xl font-bold font-mono text-[#b45309] mt-0.5">
                         -{analysis.cooldown_active}
                       </div>
-                      <div className="text-[10px] text-amber-700">90d/120d rules enforced</div>
+                      <div className="text-[10px] text-[#b45309]">90d/120d rules enforced</div>
                     </div>
 
-                    <div className="p-3 bg-emerald-50/70 rounded border border-emerald-200">
-                      <div className="text-[11px] font-semibold text-emerald-800">4. Qualified Match</div>
-                      <div className="text-xl font-bold font-mono text-emerald-800 mt-0.5">
+                    <div className="p-3 bg-[#f0fdf4] rounded border border-[#bbf7d0]">
+                      <div className="text-[11px] font-bold text-[#047857] uppercase tracking-wider">4. Qualified Match</div>
+                      <div className="text-xl font-bold font-mono text-[#047857] mt-0.5">
                         {analysis.eligible_candidates.length}
                       </div>
-                      <div className="text-[10px] text-emerald-700">Within {radiusKm} km radius</div>
+                      <div className="text-[10px] text-[#047857]">Within {radiusKm} km radius</div>
                     </div>
                   </div>
 
                   {/* Qualified Candidates Roster Table */}
                   <div className="pt-2">
-                    <div className="flex items-center justify-between mb-2.5">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
                       <div className="flex items-center space-x-2">
-                        <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                        <span className="text-xs font-bold text-[#0d1c2f] uppercase tracking-wider font-headline">
                           Qualified Candidates ({analysis.eligible_candidates.length})
                         </span>
-                        <span className="text-[11px] text-slate-500">
+                        <span className="text-[11px] text-[#565e74]">
                           Ranked by ABO affinity and distance
                         </span>
                       </div>
@@ -692,7 +702,7 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                             handleDispatch(topIds);
                           }}
                           disabled={dispatching}
-                          className="btn-primary text-xs py-1 px-3 flex items-center space-x-1.5"
+                          className="btn-primary text-xs py-1.5 px-3 flex items-center space-x-1.5 shadow-xs"
                         >
                           <Send className="w-3.5 h-3.5" />
                           <span>Dispatch Top 3 Candidates</span>
@@ -700,9 +710,9 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                       )}
                     </div>
 
-                    <div className="overflow-x-auto border border-slate-200 rounded">
-                      <table className="min-w-full divide-y divide-slate-200 text-xs">
-                        <thead className="bg-slate-50 text-slate-700 font-semibold">
+                    <div className="overflow-x-auto border border-[#cbd5e1] rounded-lg">
+                      <table className="min-w-full divide-y divide-[#cbd5e1] text-xs">
+                        <thead className="bg-[#f8f9ff] text-[#0d1c2f] font-semibold">
                           <tr>
                             <th className="py-2.5 px-3 text-left">Donor Token</th>
                             <th className="py-2.5 px-2 text-left">Blood</th>
@@ -713,10 +723,10 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                             <th className="py-2.5 px-3 text-right">Dispatch Action</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100 bg-white">
+                        <tbody className="divide-y divide-[#cbd5e1]/60 bg-white">
                           {analysis.eligible_candidates.length === 0 ? (
                             <tr>
-                              <td colSpan={7} className="py-8 text-center text-slate-500">
+                              <td colSpan={7} className="py-8 text-center text-[#565e74]">
                                 No eligible donors currently within {radiusKm} km. Try expanding the search perimeter above.
                               </td>
                             </tr>
@@ -724,33 +734,35 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                             analysis.eligible_candidates.map((c) => {
                               const isDispatched = c.dispatch_status && c.dispatch_status !== 'NOT_NOTIFIED';
                               return (
-                                <tr key={c.donor_id} className="hover:bg-slate-50/70">
-                                  <td className="py-2.5 px-3 font-mono font-semibold text-slate-900">
+                                <tr key={c.donor_id} className="hover:bg-[#f8f9ff] transition-colors">
+                                  <td className="py-2.5 px-3 font-mono font-semibold text-[#0d1c2f]">
                                     <div className="flex items-center space-x-1.5">
-                                      <Lock className="w-3 h-3 text-slate-400" />
+                                      <Lock className="w-3 h-3 text-[#565e74]" />
                                       <span>{c.code_name}</span>
                                     </div>
-                                    <span className="text-[10px] text-slate-400 font-sans block">
+                                    <span className="text-[10px] text-[#565e74] font-sans block">
                                       Identity locked
                                     </span>
                                   </td>
 
-                                  <td className="py-2.5 px-2 font-mono font-bold text-red-700 text-xs">
-                                    {c.blood_group}
+                                  <td className="py-2.5 px-2">
+                                    <span className="px-2 py-0.5 rounded bg-[#991b1b] text-white font-mono font-bold text-xs shadow-2xs">
+                                      {c.blood_group}
+                                    </span>
                                   </td>
 
-                                  <td className="py-2.5 px-2 text-slate-700 font-medium">
-                                    <span className="font-mono">{c.distance_km}</span> km
+                                  <td className="py-2.5 px-2 text-[#0d1c2f] font-medium">
+                                    <span className="font-mono font-bold">{c.distance_km}</span> km
                                   </td>
 
-                                  <td className="py-2.5 px-2 text-slate-600">
-                                    <div className="font-mono text-[11px]">{c.days_since_last_donation}d ago</div>
+                                  <td className="py-2.5 px-2 text-[#565e74]">
+                                    <div className="font-mono text-[11px] font-semibold text-[#0d1c2f]">{c.days_since_last_donation}d ago</div>
                                     <span className="badge badge-eligible mt-0.5">
                                       {c.required_interval_days}d rule cleared
                                     </span>
                                   </td>
 
-                                  <td className="py-2.5 px-2 font-mono font-semibold text-slate-900">
+                                  <td className="py-2.5 px-2 font-mono font-bold text-[#0d1c2f]">
                                     {c.match_score}
                                   </td>
 
@@ -776,7 +788,7 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                                     {isDispatched ? (
                                       <button
                                         onClick={() => onNavigateToDonorSimulator(c.dispatch_token)}
-                                        className="btn-secondary text-[11px] py-0.5 px-2"
+                                        className="btn-secondary text-[11px] py-1 px-2.5"
                                       >
                                         Inspect Alert
                                       </button>
@@ -784,7 +796,7 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                                       <button
                                         onClick={() => handleDispatch([c.donor_id])}
                                         disabled={dispatching}
-                                        className="btn-primary text-[11px] py-0.5 px-2.5"
+                                        className="btn-primary text-[11px] py-1 px-3 shadow-xs"
                                       >
                                         Notify
                                       </button>
