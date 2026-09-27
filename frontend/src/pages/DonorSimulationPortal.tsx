@@ -118,43 +118,43 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
     <div className="space-y-5">
       
       {/* Simulation Context Ribbon */}
-      <div className="workbench-panel p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="workbench-panel p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-[#cbd5e1]">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-900 text-white uppercase tracking-wider">
-              Volunteer Mobile Simulator
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#991b1b] text-white uppercase tracking-wider">
+              DONOR HUB // MOBILE SIMULATOR
             </span>
-            <span className="text-xs text-slate-500 font-semibold">Privacy Protection &amp; Consent Unmasking</span>
+            <span className="text-xs text-[#565e74] font-semibold">Challenge SC-12: Volunteer Privacy &amp; Cooldown</span>
           </div>
-          <h2 className="text-base font-bold text-slate-900 mt-1">
-            Experience the Volunteer Perspective &bull; Challenge SC-12
+          <h2 className="font-headline font-bold text-base text-[#0d1c2f] mt-1">
+            Volunteer Identity &amp; Biological Recovery Dashboard
           </h2>
-          <p className="text-xs text-slate-600 mt-0.5 max-w-3xl">
-            Volunteers receive tokenized alerts without their personal telephone number or legal name exposed to the hospital. Contact details are unmasked exclusively upon explicit confirmation.
+          <p className="text-xs text-[#565e74] mt-0.5 max-w-3xl">
+            Volunteers receive direct tokenized alerts without their personal telephone number or legal identity exposed to hospital staff. Contact details are unmasked exclusively upon explicit confirmation.
           </p>
         </div>
 
         <button
           onClick={onNavigateToHospital}
-          className="btn-secondary text-xs self-start sm:self-auto flex items-center space-x-1.5"
+          className="btn-secondary text-xs self-start sm:self-auto flex items-center space-x-1.5 shadow-xs"
         >
-          <span>Return to Hospital Command</span>
+          <span>Return to Command Console</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         
-        {/* Left Column: Volunteer Health & Deferral Passport (5 Cols) */}
+        {/* Left Column: Volunteer Health & Deferral Passport (Design: 5._donor_profile_health_dashboard) */}
         <div className="lg:col-span-5 space-y-4">
           
           {/* Persona Selection Panel */}
-          <div className="workbench-panel p-4 space-y-3">
+          <div className="workbench-panel p-4 space-y-3 border border-[#cbd5e1]">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#0d1c2f] uppercase tracking-wider font-headline">
                 Simulated Volunteer Personas
               </span>
-              <span className="text-[10px] font-mono text-slate-500">Select persona</span>
+              <span className="text-[10px] font-mono text-[#565e74]">Switch persona</span>
             </div>
 
             <div className="space-y-2">
@@ -163,29 +163,19 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
                   setSelectedDonorId('donor-001');
                   setDispatchData(null);
                 }}
-                className={`p-3 rounded border transition-all cursor-pointer ${
+                className={`p-3 rounded-md border transition-all cursor-pointer relative overflow-hidden ${
                   selectedDonorId === 'donor-001'
-                    ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
-                    : 'bg-white hover:bg-slate-50 border-slate-200'
+                    ? 'bg-[#eff4ff] border-2 border-[#991b1b] shadow-xs'
+                    : 'bg-white hover:bg-[#f8f9ff] border-[#cbd5e1]'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="font-bold text-xs">Arun Narayanan</div>
-                  <span
-                    className={`badge ${
-                      selectedDonorId === 'donor-001'
-                        ? 'bg-slate-800 text-emerald-300 border-slate-700'
-                        : 'badge-eligible'
-                    }`}
-                  >
-                    B+ Eligible
+                  <div className="font-bold text-xs text-[#0d1c2f] font-headline">Arun Narayanan</div>
+                  <span className="badge badge-eligible">
+                    B+ Cleared ✓
                   </span>
                 </div>
-                <div
-                  className={`text-[11px] mt-1 ${
-                    selectedDonorId === 'donor-001' ? 'text-slate-300' : 'text-slate-500'
-                  }`}
-                >
+                <div className="text-[11px] mt-1 text-[#565e74]">
                   Male &bull; Last donated 130 days ago (90-day cooldown cleared)
                 </div>
               </div>
@@ -195,29 +185,19 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
                   setSelectedDonorId('donor-002');
                   setDispatchData(null);
                 }}
-                className={`p-3 rounded border transition-all cursor-pointer ${
+                className={`p-3 rounded-md border transition-all cursor-pointer relative overflow-hidden ${
                   selectedDonorId === 'donor-002'
-                    ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
-                    : 'bg-white hover:bg-slate-50 border-slate-200'
+                    ? 'bg-[#eff4ff] border-2 border-[#991b1b] shadow-xs'
+                    : 'bg-white hover:bg-[#f8f9ff] border-[#cbd5e1]'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="font-bold text-xs">Fathima Basheer</div>
-                  <span
-                    className={`badge ${
-                      selectedDonorId === 'donor-002'
-                        ? 'bg-slate-800 text-amber-300 border-slate-700'
-                        : 'badge-cooldown'
-                    }`}
-                  >
+                  <div className="font-bold text-xs text-[#0d1c2f] font-headline">Fathima Basheer</div>
+                  <span className="badge badge-cooldown">
                     B+ Cooldown Active
                   </span>
                 </div>
-                <div
-                  className={`text-[11px] mt-1 ${
-                    selectedDonorId === 'donor-002' ? 'text-slate-300' : 'text-slate-500'
-                  }`}
-                >
+                <div className="text-[11px] mt-1 text-[#565e74]">
                   Female &bull; Last donated 28 days ago (92 days remaining &bull; protected from spam)
                 </div>
               </div>
@@ -227,131 +207,155 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
                   setSelectedDonorId('donor-004');
                   setDispatchData(null);
                 }}
-                className={`p-3 rounded border transition-all cursor-pointer ${
+                className={`p-3 rounded-md border transition-all cursor-pointer relative overflow-hidden ${
                   selectedDonorId === 'donor-004'
-                    ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
-                    : 'bg-white hover:bg-slate-50 border-slate-200'
+                    ? 'bg-[#eff4ff] border-2 border-[#991b1b] shadow-xs'
+                    : 'bg-white hover:bg-[#f8f9ff] border-[#cbd5e1]'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="font-bold text-xs">Sneha Kurian</div>
-                  <span
-                    className={`badge ${
-                      selectedDonorId === 'donor-004'
-                        ? 'bg-slate-800 text-emerald-300 border-slate-700'
-                        : 'badge-eligible'
-                    }`}
-                  >
+                  <div className="font-bold text-xs text-[#0d1c2f] font-headline">Sneha Kurian</div>
+                  <span className="badge badge-eligible">
                     O- Universal Red Cell
                   </span>
                 </div>
-                <div
-                  className={`text-[11px] mt-1 ${
-                    selectedDonorId === 'donor-004' ? 'text-slate-300' : 'text-slate-500'
-                  }`}
-                >
+                <div className="text-[11px] mt-1 text-[#565e74]">
                   Female &bull; Last donated 165 days ago (Cleared 120-day interval)
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Volunteer Clinical Passport & Interval Gauge */}
+          {/* Volunteer Clinical Passport & Radial Interval Gauge */}
           {selectedDonor && (
-            <div className="workbench-panel p-4 space-y-3.5">
+            <div className="workbench-panel p-4 sm:p-5 space-y-4 border border-[#cbd5e1]">
               
-              <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-                <div className="flex items-center space-x-2">
-                  <User className="w-4 h-4 text-slate-700" />
-                  <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                    Digital Health Passport
-                  </span>
-                </div>
-                <span className="font-mono text-xs text-slate-500">{selectedDonor.code_name}</span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 text-xs">
-                <div>
-                  <span className="text-slate-500 text-[11px] block">Blood Group</span>
-                  <span className="font-bold text-base text-red-700 font-mono">{selectedDonor.blood_group}</span>
-                </div>
-                <div>
-                  <span className="text-slate-500 text-[11px] block">Registered Taluk</span>
-                  <span className="font-semibold text-slate-800">{selectedDonor.taluk}, Ernakulam</span>
-                </div>
-                <div>
-                  <span className="text-slate-500 text-[11px] block">Demographics</span>
-                  <span className="font-medium text-slate-700">
-                    {selectedDonor.gender === 'M' ? 'Male' : 'Female'} &bull; {selectedDonor.weight_kg} kg
-                  </span>
-                </div>
-                <div>
-                  <span className="text-slate-500 text-[11px] block">Previous Donation</span>
-                  <span className="font-mono font-medium text-slate-700">{selectedDonor.last_donation_date}</span>
-                </div>
-              </div>
-
-              {/* Progress Recovery Bar */}
-              <div className="space-y-1.5 pt-1">
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="text-slate-600 font-medium">Interval Recovery Progress:</span>
-                  <span className="font-mono font-bold text-slate-900">
-                    {daysSinceLast} / {requiredInterval} Days ({intervalPercent}%)
-                  </span>
-                </div>
-
-                <div className="w-full bg-slate-100 rounded h-2 overflow-hidden border border-slate-200">
-                  <div
-                    className={`h-full transition-all duration-500 ${
-                      isEligible ? 'bg-emerald-600' : 'bg-amber-500'
-                    }`}
-                    style={{ width: `${intervalPercent}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              {/* Eligibility Verification Card */}
-              <div
-                className={`p-3 rounded border text-xs ${
-                  isEligible
-                    ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950'
-                    : 'bg-amber-50/70 border-amber-200 text-amber-950'
-                }`}
-              >
-                <div className="flex items-start space-x-2">
-                  {isEligible ? (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-                  ) : (
-                    <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-                  )}
-                  <div>
-                    <div className="font-bold">
-                      {isEligible ? 'Clinically Eligible to Donate' : 'Clinical Recovery Cooldown Active'}
+              {/* Header Profile Identity Capsule */}
+              <div className="flex items-center justify-between pb-3 border-b border-[#cbd5e1]">
+                <div className="flex items-center space-x-3">
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded bg-[#991b1b] text-white flex items-center justify-center font-headline font-bold text-base shadow-xs">
+                      {selectedDonor.code_name.slice(0, 2).toUpperCase()}
                     </div>
-                    <div className="text-[11px] mt-0.5 leading-relaxed">
-                      {isEligible ? (
-                        <>
-                          {daysSinceLast} days have elapsed. You meet the NBTC clinical safety interval ({requiredInterval} days for whole blood) and can accept hospital requests.
-                        </>
-                      ) : (
-                        <>
-                          Donated whole blood {daysSinceLast} days ago. Mandatory recovery interval requires {requiredInterval}{' '}
-                          days ({cooldownRemaining} days remaining). You are protected from hospital alerts to preserve ferritin levels.
-                        </>
-                      )}
+                    <span className="absolute -bottom-1 -right-1 bg-[#0d1c2f] text-white text-[9px] font-bold px-1 rounded font-mono">
+                      {selectedDonor.blood_group}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="font-headline font-bold text-sm text-[#0d1c2f]">
+                      {selectedDonor.code_name}
+                    </h3>
+                    <span className="text-[11px] font-mono text-[#565e74]">
+                      ID: {selectedDonor.id} &bull; {selectedDonor.taluk}
+                    </span>
+                  </div>
+                </div>
+
+                <span
+                  className={`badge ${isEligible ? 'badge-eligible' : 'badge-cooldown'}`}
+                >
+                  {isEligible ? 'Dispatch Ready' : 'Cooldown Restraint'}
+                </span>
+              </div>
+
+              {/* Radial Progress Gauge & Summary */}
+              <div className="bg-[#f8f9ff] p-4 rounded-lg border border-[#cbd5e1] flex flex-col sm:flex-row items-center gap-4">
+                {/* SVG Radial Gauge */}
+                <div className="relative w-28 h-28 shrink-0 flex items-center justify-center">
+                  <svg className="w-full h-full -rotate-90 transform" viewBox="0 0 120 120">
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r="50"
+                      className="stroke-[#dde9ff]"
+                      strokeWidth="10"
+                      fill="transparent"
+                    />
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r="50"
+                      className={isEligible ? 'stroke-emerald-600' : 'stroke-amber-500'}
+                      strokeWidth="10"
+                      strokeDasharray="314.159"
+                      strokeDashoffset={314.159 - (314.159 * intervalPercent) / 100}
+                      strokeLinecap="round"
+                      fill="transparent"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <span className="font-headline font-extrabold text-xl text-[#0d1c2f] leading-none">
+                      {isEligible ? '0' : cooldownRemaining}
+                    </span>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#565e74]">
+                      {isEligible ? 'Days Left' : 'Days Rest'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Gauge Summary Text */}
+                <div className="space-y-1.5 flex-1 text-center sm:text-left text-xs">
+                  <div className={`font-bold ${isEligible ? 'text-[#047857]' : 'text-amber-800'}`}>
+                    {isEligible ? 'Smart Interval: 100% Cleared ✓' : 'Biological Cooldown Active'}
+                  </div>
+                  <p className="text-[11px] text-[#565e74] leading-relaxed">
+                    {isEligible
+                      ? `${daysSinceLast} days since last donation. Ferritin and hemodynamic thresholds fully restored.`
+                      : `Donated ${daysSinceLast} days ago. Mandatory recovery interval requires ${requiredInterval} days.`}
+                  </p>
+
+                  {/* Telemetry bar */}
+                  <div className="space-y-1 pt-1">
+                    <div className="flex justify-between text-[10px] font-mono text-[#565e74]">
+                      <span>{requiredInterval}-Day Interval:</span>
+                      <span className="font-bold text-[#0d1c2f]">{daysSinceLast} / {requiredInterval}d</span>
+                    </div>
+                    <div className="w-full bg-[#dde9ff] rounded h-2 overflow-hidden">
+                      <div
+                        className={`h-full transition-all duration-500 ${isEligible ? 'bg-emerald-600' : 'bg-amber-500'}`}
+                        style={{ width: `${intervalPercent}%` }}
+                      ></div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Cryptographic Protection Guarantee */}
-              <div className="p-3 bg-slate-50 rounded border border-slate-200 text-slate-600 text-[11px] space-y-1">
-                <div className="flex items-center space-x-1.5 font-bold text-slate-800">
-                  <Lock className="w-3.5 h-3.5 text-slate-600" />
-                  <span>Privacy Guarantee (DPDPA 2023)</span>
+              {/* Modality Clinical Eligibility Matrix */}
+              <div className="space-y-2 pt-1 text-xs">
+                <span className="text-[11px] font-bold text-[#0d1c2f] uppercase tracking-wider block font-headline">
+                  Modality Clinical Eligibility Matrix
+                </span>
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="p-2.5 bg-white rounded border border-[#cbd5e1] text-center">
+                    <span className="text-[10px] text-[#565e74] block font-medium">Whole Blood</span>
+                    <span className="font-mono text-xs font-bold text-[#0d1c2f] mt-0.5 block">{requiredInterval}d</span>
+                    <span className={`text-[10px] font-bold block mt-0.5 ${isEligible ? 'text-emerald-700' : 'text-amber-700'}`}>
+                      {isEligible ? 'Cleared ✓' : 'Resting'}
+                    </span>
+                  </div>
+
+                  <div className="p-2.5 bg-white rounded border border-[#cbd5e1] text-center">
+                    <span className="text-[10px] text-[#565e74] block font-medium">Platelets</span>
+                    <span className="font-mono text-xs font-bold text-[#0d1c2f] mt-0.5 block">14d</span>
+                    <span className="text-[10px] font-bold text-emerald-700 block mt-0.5">Cleared ✓</span>
+                  </div>
+
+                  <div className="p-2.5 bg-white rounded border border-[#cbd5e1] text-center">
+                    <span className="text-[10px] text-[#565e74] block font-medium">Plasma</span>
+                    <span className="font-mono text-xs font-bold text-[#0d1c2f] mt-0.5 block">28d</span>
+                    <span className="text-[10px] font-bold text-emerald-700 block mt-0.5">Cleared ✓</span>
+                  </div>
                 </div>
-                <p>
-                  Your phone number (<code>{selectedDonor.phone}</code>) is stored in an encrypted table and is never exposed in hospital candidate tables or public registries.
+              </div>
+
+              {/* Spam Protection Guarantee Notice */}
+              <div className="p-3 bg-[#eff4ff] border-l-4 border-[#991b1b] rounded-r text-xs space-y-1">
+                <div className="flex items-center space-x-1.5 font-bold text-[#991b1b]">
+                  <span className="material-symbols-outlined text-sm">verified</span>
+                  <span>Zero Broadcast Fatigue Guarantee</span>
+                </div>
+                <p className="text-[11px] text-[#565e74] leading-relaxed">
+                  Your phone number (<code>{selectedDonor.phone}</code>) is permanently encrypted. You only receive direct alerts when your exact blood group is in STAT need within your taluk.
                 </p>
               </div>
 
@@ -359,8 +363,8 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
           )}
 
           {/* Quick Dispatch Token Inspector */}
-          <div className="workbench-panel p-4 space-y-2 text-xs">
-            <span className="font-bold text-slate-900 uppercase tracking-wider block text-[11px]">
+          <div className="workbench-panel p-4 space-y-2.5 text-xs border border-[#cbd5e1]">
+            <span className="font-bold text-[#0d1c2f] uppercase tracking-wider block text-[11px] font-headline">
               Inspect Alert by Cryptographic Token
             </span>
             <div className="flex space-x-2">
@@ -369,12 +373,12 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
                 placeholder="Paste 32-char token..."
                 value={tokenInput}
                 onChange={(e) => setTokenInput(e.target.value)}
-                className="flex-1 text-xs border border-slate-300 rounded px-2.5 py-1.5 font-mono"
+                className="flex-1 text-xs border border-[#cbd5e1] rounded px-3 py-1.5 font-mono focus:border-[#991b1b]"
               />
               <button
                 onClick={() => fetchDispatch(tokenInput)}
                 disabled={loading || !tokenInput}
-                className="btn-primary text-xs py-1.5 px-3"
+                className="btn-primary text-xs py-1.5 px-3 shadow-xs"
               >
                 Inspect
               </button>
