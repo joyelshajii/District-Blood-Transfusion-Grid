@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Donor Profile &amp; Health Dashboard // HEMO-DISPATCH</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-primary-container": "#ffaaa1",
+            "secondary-container": "#dae2fd",
+            "secondary-fixed-dim": "#bec6e0",
+            "surface-tint": "#b02d29",
+            "on-primary-fixed-variant": "#8e1214",
+            "on-secondary-fixed": "#131b2e",
+            "error": "#ba1a1a",
+            "primary": "#760009",
+            "on-background": "#0d1c2f",
+            "on-surface-variant": "#59413e",
+            "primary-fixed-dim": "#ffb4ac",
+            "on-surface": "#0d1c2f",
+            "surface": "#f8f9ff",
+            "primary-fixed": "#ffdad6",
+            "secondary-fixed": "#dae2fd",
+            "tertiary-container": "#005a40",
+            "background": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "surface-container": "#e6eeff",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary-fixed": "#002115",
+            "primary-container": "#991b1b",
+            "tertiary-fixed-dim": "#7bd8b1",
+            "tertiary": "#00402d",
+            "on-error": "#ffffff",
+            "surface-container-low": "#eff4ff",
+            "inverse-on-surface": "#ebf1ff",
+            "on-error-container": "#93000a",
+            "outline-variant": "#e1bfbb",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#233144",
+            "on-tertiary-fixed-variant": "#00513a",
+            "tertiary-fixed": "#97f5cc",
+            "on-tertiary-container": "#75d2ab",
+            "inverse-primary": "#ffb4ac",
+            "surface-container-high": "#dde9ff",
+            "secondary": "#565e74",
+            "error-container": "#ffdad6",
+            "on-primary-fixed": "#410002",
+            "outline": "#8d706d",
+            "surface-variant": "#d5e3fd",
+            "surface-container-highest": "#d5e3fd",
+            "surface-dim": "#ccdbf4",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem",
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "gutter": "1.25rem",
+            "space-md": "1rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "data-mono": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "400" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.025em", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "0", "fontWeight": "400" }],
+            "data-mono": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "display-lg": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-fixed selection:text-primary">
+<!-- TOP APP BAR (Shared Component) -->
+<header class="flex items-center justify-between px-space-lg h-16 w-full border-b border-outline-variant bg-surface-container-lowest sticky top-0 z-50">
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="emergency_heat">emergency_heat</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">HEMO-DISPATCH // DISTRICT 04</span>
+</div>
+<!-- Search Bar on Left -->
+<div class="hidden lg:flex items-center relative">
+<span class="material-symbols-outlined absolute left-3 text-secondary text-lg" data-icon="search">search</span>
+<input class="pl-9 pr-3 py-1.5 w-64 bg-surface-container-low border border-outline-variant rounded text-body-sm font-body-sm focus:outline-none focus:border-primary text-on-surface placeholder:text-secondary" placeholder="Search registry token, blood type, alert ID..." type="text"/>
+</div>
+</div>
+<!-- Web Navigation Cluster -->
+<nav class="hidden md:flex items-center gap-space-md font-label-md text-label-md">
+<a class="text-secondary hover:text-on-surface pb-1 transition-colors" href="#">Intake</a>
+<a class="text-secondary hover:text-on-surface pb-1 transition-colors" href="#">Command Console</a>
+<a class="text-secondary hover:text-on-surface pb-1 transition-colors" href="#">Donor Alerts</a>
+<a class="text-secondary hover:text-on-surface pb-1 transition-colors" href="#">Fulfillment</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-semibold" href="#">Donor Hub</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-space-sm">
+<button class="hidden xl:inline-flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-container text-on-surface border border-outline-variant font-label-sm text-label-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+        Audit Logs
+      </button>
+<button class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded bg-primary-container text-on-primary font-label-md text-label-md font-semibold tracking-tight shadow-sm hover:bg-primary transition-colors active:scale-[0.99]">
+<span class="material-symbols-outlined text-base" data-icon="emergency_heat">emergency_heat</span>
+        Emergency STAT Request
+      </button>
+<div class="h-6 w-px bg-outline-variant mx-1"></div>
+<button class="p-1.5 text-secondary hover:text-on-surface hover:bg-surface-container-low rounded transition-colors" title="Donor Notifications">
+<span class="material-symbols-outlined text-xl" data-icon="notifications_active">notifications_active</span>
+</button>
+<div class="flex items-center gap-space-xs pl-1">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md font-bold">
+          AM
+        </div>
+</div>
+</div>
+</header>
+<!-- MAIN WRAPPER: Dense Tactical Side Rail + Central Canvas -->
+<div class="flex flex-1 w-full">
+<!-- DENSE TACTICAL RAIL (SideNavBar) -->
+<aside class="hidden md:flex flex-col justify-between h-[calc(100vh-4rem)] w-64 p-space-md border-r border-outline-variant bg-surface-container-low sticky top-16 shrink-0">
+<div class="space-y-space-md">
+<!-- Rail Header -->
+<div class="px-space-xs py-space-xs flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded bg-surface-container-lowest border border-outline-variant flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="medical_services">medical_services</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight leading-none">DISTRICT REGISTRY</div>
+<div class="font-label-sm text-label-sm text-secondary mt-0.5">Operational Grid Tier-1</div>
+</div>
+</div>
+<!-- Call to Action Banner -->
+<div class="p-space-sm bg-surface-container-lowest border border-outline-variant rounded">
+<button class="w-full flex items-center justify-center gap-1.5 py-1.5 bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold rounded hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="campaign">campaign</span>
+            Instant Broadcast
+          </button>
+</div>
+<!-- Navigation Tabs: Exact match to 'Health Profile' active rule -->
+<nav class="space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary hover:bg-surface-variant hover:text-on-surface rounded transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="assignment_add">assignment_add</span>
+<span class="font-label-sm text-label-sm">Intake Form</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary hover:bg-surface-variant hover:text-on-surface rounded transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="radar">radar</span>
+<span class="font-label-sm text-label-sm">Command Console</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary hover:bg-surface-variant hover:text-on-surface rounded transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="notifications_active">notifications_active</span>
+<span class="font-label-sm text-label-sm">Request Portal</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary hover:bg-surface-variant hover:text-on-surface rounded transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="emergency_home">emergency_home</span>
+<span class="font-label-sm text-label-sm">Fulfillment Hub</span>
+</a>
+<!-- Active Tab: Health Profile -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm bg-surface-container text-primary border-l-4 border-primary font-semibold rounded-r transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="vital_signs" data-weight="fill" style="font-variation-settings: 'FILL' 1;">vital_signs</span>
+<span class="font-label-sm text-label-sm">Health Profile</span>
+</a>
+</nav>
+</div>
+<!-- Rail Footer Actions -->
+<div class="pt-space-md border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary hover:bg-surface-variant hover:text-on-surface rounded transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="monitoring">monitoring</span>
+<span class="font-label-sm text-label-sm">Telemetry Audit</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary hover:bg-surface-variant hover:text-on-surface rounded transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">System Settings</span>
+</a>
+<div class="px-space-md py-2 mt-2 bg-surface-container rounded text-center">
+<span class="font-data-mono text-data-mono text-xs text-secondary font-semibold">TOKEN: #D-4821 // D04</span>
+</div>
+</div>
+</aside>
+<!-- CONTENT CANVAS -->
+<main class="flex-1 p-space-md md:p-space-lg lg:p-space-xl max-w-7xl mx-auto w-full space-y-space-lg">
+<!-- Breadcrumbs & Status Indicator Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pb-space-sm border-b border-outline-variant">
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-secondary">
+<span>Donor Hub</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span>District Registry 04</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-semibold">Alex Morgan (#D-4821)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            SURGE READY // UNIVERSAL COMPATIBLE
+          </span>
+<span class="font-data-mono text-data-mono text-xs text-secondary">Sync: Live UTC 14:02:18</span>
+</div>
+</div>
+<!-- HEADER PROFILE CARD (Hero Bento Tier 1) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded p-space-lg relative overflow-hidden shadow-sm">
+<!-- Sub-accent decorative edge -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary-container"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<!-- Identity Details -->
+<div class="lg:col-span-6 flex flex-col sm:flex-row items-start sm:items-center gap-space-md">
+<div class="relative">
+<div class="w-20 h-20 rounded bg-primary-container text-on-primary flex items-center justify-center font-headline-xl text-headline-xl font-bold ring-4 ring-primary-fixed">
+                AM
+              </div>
+<span class="absolute -bottom-1 -right-1 bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded border border-white">
+                O-
+              </span>
+</div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center gap-2">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Alex Morgan</h1>
+<span class="px-2 py-0.5 rounded bg-surface-container font-data-mono text-data-mono text-xs text-on-surface-variant font-semibold">
+                  #D-4821
+                </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-xs text-amber-600" data-icon="shield">shield</span>
+                  Gold Guardian Tier
+                </span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">
+                Registered Phlebotomy Candidate • District 04 Command Zone • Biometric Pass Verified
+              </p>
+<div class="flex items-center gap-3 pt-1 text-xs font-label-sm text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-tertiary" data-icon="check_circle">check_circle</span> Antibodies: Negative</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-tertiary" data-icon="check_circle">check_circle</span> Identity: Tokenized</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary" data-icon="location_on">location_on</span> Sector 4B West</span>
+</div>
+</div>
+</div>
+<!-- Quick Metric Indicators (Clinical Precision Badges) -->
+<div class="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-space-md">
+<!-- Universal Donor Tile -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded">
+<div class="font-label-sm text-label-sm text-secondary">Blood Phenotype</div>
+<div class="mt-1 flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">O-</span>
+<span class="text-xs font-semibold text-primary-container">(Universal)</span>
+</div>
+<div class="text-[11px] text-secondary mt-0.5">High Demand Unit</div>
+</div>
+<!-- Total Units Donated -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded">
+<div class="font-label-sm text-label-sm text-secondary">Lifetime Donated</div>
+<div class="mt-1 flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">8</span>
+<span class="font-label-sm text-label-sm text-secondary">Units</span>
+</div>
+<div class="text-[11px] text-tertiary font-semibold mt-0.5">~24 Lives Impacted</div>
+</div>
+<!-- Health Status -->
+<div class="col-span-2 sm:col-span-1 p-space-sm bg-emerald-50 border border-emerald-200 rounded">
+<div class="font-label-sm text-label-sm text-emerald-800">Dispatch Status</div>
+<div class="mt-1 flex items-center gap-1 font-headline-sm text-headline-sm font-bold text-emerald-900">
+<span class="material-symbols-outlined text-emerald-700 text-lg" data-icon="check_circle">check_circle</span>
+                Cleared
+              </div>
+<div class="text-[11px] text-emerald-700 mt-0.5">Zero Active Restraints</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CORE FEATURE: SMART DONATION INTERVAL & RECOVERY VISUALIZER -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left 7 cols: Radial Countdown & Cooldown Engine -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant rounded p-space-lg space-y-space-md">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="timer">timer</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Smart Interval &amp; Biological Recovery</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-bold">
+              100% RESTORED
+            </span>
+</div>
+<!-- Radial Progress Gauge and Hero Metrics -->
+<div class="flex flex-col sm:flex-row items-center gap-space-lg py-space-sm">
+<!-- Visual Circular Progress Dial -->
+<div class="relative w-44 h-44 shrink-0 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 120 120">
+<!-- Background Ring -->
+<circle class="stroke-surface-container" cx="60" cy="60" fill="transparent" r="50" stroke-width="10"></circle>
+<!-- Active Restored Ring (100% cleared) -->
+<circle class="stroke-emerald-600" cx="60" cy="60" fill="transparent" r="50" stroke-dasharray="314.159" stroke-dashoffset="0" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<!-- Center Metric Stack -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-2">
+<span class="font-display-lg text-2xl font-extrabold text-on-surface leading-none">0</span>
+<span class="font-label-sm text-label-sm font-bold text-emerald-800 uppercase tracking-wide">Days Left</span>
+<span class="text-[10px] text-secondary font-data-mono mt-0.5">ELIGIBLE NOW</span>
+</div>
+</div>
+<!-- Summary Text and Metric Breakdown -->
+<div class="space-y-space-sm flex-1 text-center sm:text-left">
+<div>
+<div class="font-label-md text-label-md font-bold text-emerald-900">Next Whole Blood Donation: READY</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1">
+                  Last clinical donation recorded <strong class="text-on-surface">114 days ago</strong> at Metro General Central. Whole blood minimum cooldown is 90 days. Hemoglobin restoration threshold achieved.
+                </p>
+</div>
+<!-- Cooldown Telemetry Bar -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between text-xs font-label-sm">
+<span class="text-secondary">90-Day Standard Interval:</span>
+<span class="font-data-mono font-bold text-on-surface">114 / 90 Days (Passed)</span>
+</div>
+<div class="w-full h-2 rounded bg-surface-container overflow-hidden">
+<div class="h-full bg-emerald-600 rounded" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modality Interval Rules Breakdown (Whole Blood, Platelets, Plasma) -->
+<div class="border-t border-outline-variant pt-space-md space-y-space-sm">
+<h3 class="font-label-md text-label-md font-bold text-on-surface">Modality Clinical Eligibility Matrix</h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<!-- Whole Blood -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold">Whole Blood</span>
+<span class="text-emerald-700 material-symbols-outlined text-base" data-icon="check_circle">check_circle</span>
+</div>
+<div class="mt-2 text-xs text-secondary">
+                  Cooldown: <span class="font-semibold text-on-surface">90 Days</span>
+</div>
+<div class="mt-1 font-label-sm text-label-sm text-emerald-800 font-bold">Cleared ✓</div>
+</div>
+<!-- Platelets / Apheresis -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold">Platelets (Apheresis)</span>
+<span class="text-emerald-700 material-symbols-outlined text-base" data-icon="check_circle">check_circle</span>
+</div>
+<div class="mt-2 text-xs text-secondary">
+                  Cooldown: <span class="font-semibold text-on-surface">14 Days</span>
+</div>
+<div class="mt-1 font-label-sm text-label-sm text-emerald-800 font-bold">Cleared ✓</div>
+</div>
+<!-- Plasma -->
+<div class="p-space-sm bg-surface-container-low border border-outline-variant rounded">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold">Plasma</span>
+<span class="text-emerald-700 material-symbols-outlined text-base" data-icon="check_circle">check_circle</span>
+</div>
+<div class="mt-2 text-xs text-secondary">
+                  Cooldown: <span class="font-semibold text-on-surface">28 Days</span>
+</div>
+<div class="mt-1 font-label-sm text-label-sm text-emerald-800 font-bold">Cleared ✓</div>
+</div>
+</div>
+</div>
+<!-- Cooldown Shield Status Banner -->
+<div class="p-space-sm bg-surface-container border-l-4 border-primary rounded flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5" data-icon="verified">verified</span>
+<div>
+<div class="font-label-sm text-label-sm font-bold text-primary">
+                SPAM PROTECTION ACTIVE — Zero Broadcast Fatigue
+              </div>
+<p class="font-body-sm text-body-sm text-secondary text-xs mt-0.5">
+                You will only receive high-priority direct alerts when your exact blood type (<strong class="text-on-surface">O-Negative</strong>) is in verified STAT emergency need within District 04 triage wards. Routine marketing calls are permanently suppressed.
+              </p>
+</div>
+</div>
+</div>
+<!-- Right 5 cols: Credentials & Certificate Hub -->
+<div class="lg:col-span-5 space-y-space-md">
+<!-- Downloadable Donor Card Widget (Tier 2 Soft Border) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-space-sm relative overflow-hidden shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Verified Digital ID</span>
+<span class="font-data-mono text-data-mono text-xs text-primary font-bold">BIO-KEY #9401</span>
+</div>
+<!-- Virtual Donor Card Face -->
+<div class="p-space-md rounded bg-gradient-to-br from-primary to-primary-container text-on-primary shadow-sm space-y-space-md">
+<div class="flex justify-between items-start">
+<div>
+<div class="text-[10px] tracking-widest text-primary-fixed uppercase font-bold">District 04 Regional Dispatch</div>
+<div class="font-headline-sm text-headline-sm font-bold tracking-tight">Alex Morgan</div>
+</div>
+<div class="w-10 h-10 rounded bg-surface-container-lowest/15 backdrop-blur border border-white/20 flex items-center justify-center font-bold text-lg">
+                  O-
+                </div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-xs">
+<div>
+<span class="text-primary-fixed text-[10px] block">REGISTRY ID</span>
+<span class="font-data-mono font-semibold">D-4821-D04</span>
+</div>
+<div>
+<span class="text-primary-fixed text-[10px] block">TIER LEVEL</span>
+<span class="font-semibold">Gold Guardian (8 Units)</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-white/20 text-[10px]">
+<span class="font-data-mono">EXPIRES: 12/2026</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="lock">lock</span> ISO-15189 COMPLIANT</span>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-1.5 px-space-sm bg-surface-container hover:bg-surface-variant text-on-surface border border-outline-variant rounded font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="download">download</span>
+                Download Wallet Pass
+              </button>
+<button class="py-1.5 px-3 bg-surface-container hover:bg-surface-variant text-on-surface border border-outline-variant rounded font-label-sm text-label-sm transition-colors" title="Print Physical Card">
+<span class="material-symbols-outlined text-base" data-icon="print">print</span>
+</button>
+</div>
+</div>
+<!-- Certificate of Appreciation Badge -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-space-sm">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded bg-amber-100 border border-amber-300 text-amber-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="workspace_premium" data-weight="fill" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-on-surface">Gold Guardian Certificate</h4>
+<p class="font-body-sm text-body-sm text-xs text-secondary">
+                  Awarded for exceeding 7 whole-blood collections in District 04 trauma sectors.
+                </p>
+</div>
+</div>
+<div class="pt-2 border-t border-outline-variant flex items-center justify-between text-xs">
+<span class="text-secondary font-data-mono">ISSUED: 15-NOV-2023</span>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+                View Certificate PDF
+                <span class="material-symbols-outlined text-xs" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- PRIVACY & AVAILABILITY CONFIGURATION MATRIX -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded p-space-lg space-y-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm border-b border-outline-variant pb-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="tune">tune</span>
+              Privacy &amp; Availability Configuration Matrix
+            </h2>
+<p class="font-body-sm text-body-sm text-secondary text-xs mt-0.5">
+              Control emergency paging thresholds, geolocation parameters, and strict personal data tokenization.
+            </p>
+</div>
+<button class="px-space-md py-1.5 bg-primary text-on-primary font-label-sm text-label-sm font-semibold rounded hover:bg-primary-container transition-colors">
+            Save Matrix Preferences
+          </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Control 1: Target Radius Slider -->
+<div class="p-space-md bg-surface-container-low border border-outline-variant rounded space-y-space-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Target Radius</span>
+<span class="font-data-mono text-data-mono text-xs font-bold text-primary bg-primary-fixed px-2 py-0.5 rounded" id="radiusVal">15 km</span>
+</div>
+<p class="text-xs text-secondary mt-1">
+                Maximum dispatch distance inside District 04 metropolitan limits.
+              </p>
+</div>
+<div class="space-y-1 pt-2">
+<input class="w-full accent-primary h-1.5 bg-surface-container rounded cursor-pointer" max="50" min="5" oninput="document.getElementById('radiusVal').innerText = this.value + ' km'" step="5" type="range" value="15"/>
+<div class="flex justify-between text-[10px] text-secondary font-data-mono">
+<span>5 km</span>
+<span>25 km</span>
+<span>50 km</span>
+</div>
+</div>
+</div>
+<!-- Control 2: Strict Privacy Masking -->
+<div class="p-space-md bg-surface-container-low border border-outline-variant rounded space-y-space-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Contact Privacy</span>
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="lock">lock</span>
+</div>
+<p class="text-xs text-secondary mt-1">
+                Strict Tokenization Mode: Mask personal phone &amp; name until dispatch request accepted.
+              </p>
+</div>
+<!-- Custom Toggle -->
+<label class="flex items-center justify-between cursor-pointer pt-2">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Strict Masking</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+<!-- Control 3: Quiet Hours / Do Not Disturb -->
+<div class="p-space-md bg-surface-container-low border border-outline-variant rounded space-y-space-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Quiet Hours</span>
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="bedtime">bedtime</span>
+</div>
+<p class="text-xs text-secondary mt-1">
+                Silence alerts between 10:00 PM - 07:00 AM unless emergency STAT override occurs.
+              </p>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<div class="font-data-mono text-data-mono text-xs font-semibold text-on-surface bg-surface-container px-2 py-1 rounded">
+                22:00 — 07:00
+              </div>
+<span class="text-[11px] text-primary font-semibold">STAT Override Allowed</span>
+</div>
+</div>
+<!-- Control 4: Temporary Availability Toggle -->
+<div class="p-space-md bg-surface-container-low border border-outline-variant rounded space-y-space-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Availability State</span>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+</div>
+<p class="text-xs text-secondary mt-1">
+                Mark active or toggle pause for travel, flu recovery, or scheduling conflict.
+              </p>
+</div>
+<!-- Segmented Control Button -->
+<div class="grid grid-cols-2 gap-1 p-0.5 bg-surface-container rounded text-xs font-label-sm text-center pt-1">
+<button class="py-1 px-2 rounded bg-surface-container-lowest text-primary font-bold shadow-sm">
+                Active Donor
+              </button>
+<button class="py-1 px-2 rounded text-secondary hover:text-on-surface">
+                Paused
+              </button>
+</div>
+</div>
+</div>
+</section>
+<!-- DONATION HISTORY LOG TABLE -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded p-space-lg space-y-space-md shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm border-b border-outline-variant pb-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="history">history</span>
+              Verified Clinical Donation History Log
+            </h2>
+<p class="font-body-sm text-body-sm text-secondary text-xs mt-0.5">
+              Audited electronic records compliant with National Blood Transfusion Board protocol.
+            </p>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1 px-space-sm py-1 border border-outline-variant rounded text-secondary font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span> Filter
+            </button>
+<button class="inline-flex items-center gap-1 px-space-sm py-1 border border-outline-variant rounded text-secondary font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="file_download">file_download</span> Export CSV
+            </button>
+</div>
+</div>
+<!-- Table Responsive Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse text-body-sm font-body-sm">
+<thead>
+<tr class="border-b border-outline-variant font-label-sm text-label-sm text-secondary uppercase bg-surface-container-low">
+<th class="py-2.5 px-space-md">Collection Date</th>
+<th class="py-2.5 px-space-md">Receiving Institution</th>
+<th class="py-2.5 px-space-md">Modality / Units</th>
+<th class="py-2.5 px-space-md">Verified Cooldown End</th>
+<th class="py-2.5 px-space-md">Batch / Chain ID</th>
+<th class="py-2.5 px-space-md text-right">Certificate</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Log Entry 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-space-md font-data-mono font-semibold text-on-surface">
+                  18-OCT-2023
+                </td>
+<td class="py-3 px-space-md">
+<div class="font-semibold text-on-surface">Metro General Trauma Ward</div>
+<div class="text-xs text-secondary font-data-mono">Bed Unit #04-T</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1 font-semibold text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="bloodtype">bloodtype</span>
+                    Whole Blood (1 Unit / 450ml)
+                  </span>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-data-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 text-xs font-semibold">
+                    16-JAN-2024 (Completed)
+                  </span>
+</td>
+<td class="py-3 px-space-md font-data-mono text-xs text-secondary">
+                  MG-90812-WB
+                </td>
+<td class="py-3 px-space-md text-right">
+<button class="text-primary hover:underline font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="receipt_long">receipt_long</span> Record
+                  </button>
+</td>
+</tr>
+<!-- Log Entry 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-space-md font-data-mono font-semibold text-on-surface">
+                  12-JUN-2023
+                </td>
+<td class="py-3 px-space-md">
+<div class="font-semibold text-on-surface">St. Jude Medical Center</div>
+<div class="text-xs text-secondary font-data-mono">Emergency Surge Ward</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1 font-semibold text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="bloodtype">bloodtype</span>
+                    Whole Blood (1 Unit / 450ml)
+                  </span>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-data-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 text-xs font-semibold">
+                    10-SEP-2023 (Completed)
+                  </span>
+</td>
+<td class="py-3 px-space-md font-data-mono text-xs text-secondary">
+                  SJ-44219-WB
+                </td>
+<td class="py-3 px-space-md text-right">
+<button class="text-primary hover:underline font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="receipt_long">receipt_long</span> Record
+                  </button>
+</td>
+</tr>
+<!-- Log Entry 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-space-md font-data-mono font-semibold text-on-surface">
+                  19-JAN-2023
+                </td>
+<td class="py-3 px-space-md">
+<div class="font-semibold text-on-surface">City Central Clinic</div>
+<div class="text-xs text-secondary font-data-mono">Mobile Dispatch Bus #2</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1 font-semibold text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="bloodtype">bloodtype</span>
+                    Whole Blood (1 Unit / 450ml)
+                  </span>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-data-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 text-xs font-semibold">
+                    19-APR-2023 (Completed)
+                  </span>
+</td>
+<td class="py-3 px-space-md font-data-mono text-xs text-secondary">
+                  CC-11028-WB
+                </td>
+<td class="py-3 px-space-md text-right">
+<button class="text-primary hover:underline font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="receipt_long">receipt_long</span> Record
+                  </button>
+</td>
+</tr>
+<!-- Log Entry 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-space-md font-data-mono font-semibold text-on-surface">
+                  02-AUG-2022
+                </td>
+<td class="py-3 px-space-md">
+<div class="font-semibold text-on-surface">Metro General Trauma Ward</div>
+<div class="text-xs text-secondary font-data-mono">STAT Incident Code 9</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1 font-semibold text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="bloodtype">bloodtype</span>
+                    Whole Blood (1 Unit / 450ml)
+                  </span>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-data-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 text-xs font-semibold">
+                    31-OCT-2022 (Completed)
+                  </span>
+</td>
+<td class="py-3 px-space-md font-data-mono text-xs text-secondary">
+                  MG-00481-WB
+                </td>
+<td class="py-3 px-space-md text-right">
+<button class="text-primary hover:underline font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="receipt_long">receipt_long</span> Record
+                  </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pt-space-sm flex items-center justify-between text-xs text-secondary font-label-sm">
+<span>Showing 4 of 8 total donations</span>
+<button class="text-primary font-semibold hover:underline">View Archived Historical Ledger →</button>
+</div>
+</section>
+</main>
+</div>
+<!-- CLINICAL FOOTER BAR -->
+<footer class="w-full bg-surface-container-low border-t border-outline-variant py-3 px-space-lg text-xs text-secondary flex flex-col md:flex-row items-center justify-between gap-2">
+<div class="flex items-center gap-3">
+<span class="font-bold text-primary font-label-sm">HEMO-DISPATCH PROTOCOL v4.12</span>
+<span>•</span>
+<span>District Registry 04 Server Cluster</span>
+<span>•</span>
+<span>Clinical Security Standard HIPAA / ISO-27001 Compliant</span>
+</div>
+<div class="font-data-mono">
+      Logged as Dispatch Coordinator Badge #4082 • Node #D04-89
+    </div>
+</footer>
+</body></html>

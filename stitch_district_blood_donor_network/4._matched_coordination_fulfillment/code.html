@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fulfillment Hub // Match #D-4821 - HEMO-DISPATCH</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-primary-container": "#ffaaa1",
+            "secondary-container": "#dae2fd",
+            "secondary-fixed-dim": "#bec6e0",
+            "surface-tint": "#b02d29",
+            "on-primary-fixed-variant": "#8e1214",
+            "on-secondary-fixed": "#131b2e",
+            "error": "#ba1a1a",
+            "primary": "#760009",
+            "on-background": "#0d1c2f",
+            "on-surface-variant": "#59413e",
+            "primary-fixed-dim": "#ffb4ac",
+            "on-surface": "#0d1c2f",
+            "surface": "#f8f9ff",
+            "primary-fixed": "#ffdad6",
+            "secondary-fixed": "#dae2fd",
+            "tertiary-container": "#005a40",
+            "background": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "surface-container": "#e6eeff",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary-fixed": "#002115",
+            "primary-container": "#991b1b",
+            "tertiary-fixed-dim": "#7bd8b1",
+            "tertiary": "#00402d",
+            "on-error": "#ffffff",
+            "surface-container-low": "#eff4ff",
+            "inverse-on-surface": "#ebf1ff",
+            "on-error-container": "#93000a",
+            "outline-variant": "#e1bfbb",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#233144",
+            "on-tertiary-fixed-variant": "#00513a",
+            "tertiary-fixed": "#97f5cc",
+            "on-tertiary-container": "#75d2ab",
+            "inverse-primary": "#ffb4ac",
+            "surface-container-high": "#dde9ff",
+            "secondary": "#565e74",
+            "error-container": "#ffdad6",
+            "on-primary-fixed": "#410002",
+            "outline": "#8d706d",
+            "surface-variant": "#d5e3fd",
+            "surface-container-highest": "#d5e3fd",
+            "surface-dim": "#ccdbf4",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem",
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "gutter": "1.25rem",
+            "space-md": "1rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "data-mono": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "400" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.025em", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "0", "fontWeight": "400" }],
+            "data-mono": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "display-lg": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-fill {
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar (Shared Component) -->
+<header class="w-full sticky top-0 z-50 flex items-center justify-between px-space-lg h-16 border-b border-outline-variant dark:border-outline bg-surface-container-lowest dark:bg-inverse-surface">
+<!-- Left: Brand Logo & Context -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-2xl font-bold" data-icon="emergency_heat">emergency_heat</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary dark:text-inverse-primary tracking-tight">HEMO-DISPATCH // DISTRICT 04</span>
+</div>
+<div class="hidden xl:flex items-center bg-surface-container-low px-space-sm py-1 rounded border border-outline-variant/60 gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-base" data-icon="search">search</span>
+<input class="bg-transparent border-none text-body-sm font-body-sm focus:outline-none w-64 text-on-surface placeholder:text-secondary" placeholder="Search registry, donor token, unit ID..." type="text"/>
+</div>
+</div>
+<!-- Center/Right: Navigation Links from JSON (Desktop) -->
+<nav class="hidden md:flex items-center gap-space-md">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-inverse-on-surface pb-1 transition-colors font-label-md text-label-md" href="#">Intake</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-inverse-on-surface pb-1 transition-colors font-label-md text-label-md" href="#">Command Console</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-inverse-on-surface pb-1 transition-colors font-label-md text-label-md" href="#">Donor Alerts</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-semibold font-label-md text-label-md" href="#">Fulfillment</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-inverse-on-surface pb-1 transition-colors font-label-md text-label-md" href="#">Donor Hub</a>
+</nav>
+<!-- Trailing Actions & Officer Profile -->
+<div class="flex items-center gap-space-sm">
+<button class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-container hover:bg-surface-variant text-on-surface border border-outline-variant rounded font-label-sm text-label-sm active:scale-[0.99] transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="history_edu">history_edu</span>
+        Audit Logs
+      </button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary-container text-white rounded font-label-sm text-label-sm font-bold tracking-wide shadow-sm hover:bg-primary active:scale-[0.99] transition-all">
+<span class="material-symbols-outlined text-sm animate-pulse" data-icon="e911_emergency">e911_emergency</span>
+        Emergency STAT Request
+      </button>
+<div class="h-6 w-[1px] bg-outline-variant mx-1 hidden sm:block"></div>
+<button class="p-1.5 text-secondary hover:text-primary transition-colors relative" title="Notifications">
+<span class="material-symbols-outlined text-xl" data-icon="notifications_active">notifications_active</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="flex items-center gap-2 pl-1" title="Dispatch Coordinator Badge ID 4082">
+<span class="material-symbols-outlined text-2xl text-secondary" data-icon="account_circle">account_circle</span>
+<span class="hidden xl:inline text-label-sm font-label-sm text-secondary font-mono">DC-4082</span>
+</div>
+</div>
+</header>
+<!-- Shell Wrapper -->
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar (Dense Tactical Rail - Shared Component) -->
+<aside class="hidden md:flex flex-col justify-between w-64 border-r border-outline-variant dark:border-outline bg-surface-container-low dark:bg-inverse-surface p-space-md select-none shrink-0">
+<div class="flex flex-col gap-space-md">
+<!-- Sub-header branding -->
+<div class="px-space-sm pb-space-sm border-b border-outline-variant/70">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="local_hospital">local_hospital</span>
+<div class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed tracking-tight">DISTRICT REGISTRY</div>
+</div>
+<div class="text-label-sm font-label-sm text-secondary tracking-wider font-data-mono uppercase mt-0.5">Operational Grid Tier-1</div>
+</div>
+<!-- 5 Tabs with Exact Mapping: Fulfillment Hub is Active -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container hover:text-on-surface dark:hover:text-inverse-on-surface rounded transition-colors text-label-sm font-label-sm active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="assignment_add">assignment_add</span>
+<span>Intake Form</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container hover:text-on-surface dark:hover:text-inverse-on-surface rounded transition-colors text-label-sm font-label-sm active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="radar">radar</span>
+<span>Command Console</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container hover:text-on-surface dark:hover:text-inverse-on-surface rounded transition-colors text-label-sm font-label-sm active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="notifications_active">notifications_active</span>
+<span>Request Portal</span>
+</a>
+<!-- ACTIVE: Fulfillment Hub -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm bg-surface-container dark:bg-surface-container-high text-primary dark:text-inverse-primary border-l-4 border-primary dark:border-inverse-primary font-semibold rounded-r transition-colors text-label-sm font-label-sm active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-lg material-symbols-fill" data-icon="emergency_home">emergency_home</span>
+<span>Fulfillment Hub</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container hover:text-on-surface dark:hover:text-inverse-on-surface rounded transition-colors text-label-sm font-label-sm active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="vital_signs">vital_signs</span>
+<span>Health Profile</span>
+</a>
+</nav>
+<!-- CTA Action in Side Rail -->
+<div class="pt-space-xs">
+<button class="w-full flex items-center justify-center gap-2 py-2 px-space-md bg-surface-container-highest hover:bg-surface-variant text-on-surface border border-outline-variant font-label-sm text-label-sm font-semibold rounded active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="podcasts">podcasts</span>
+<span>Instant Broadcast</span>
+</button>
+</div>
+</div>
+<!-- Footer SideNav Controls -->
+<div class="pt-space-sm border-t border-outline-variant/60 flex flex-col gap-1">
+<a class="flex items-center gap-space-sm px-space-md py-1.5 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container hover:text-on-surface text-label-sm font-label-sm rounded transition-colors" href="#">
+<span class="material-symbols-outlined text-base" data-icon="monitoring">monitoring</span>
+<span>Telemetry Audit</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-1.5 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container hover:text-on-surface text-label-sm font-label-sm rounded transition-colors" href="#">
+<span class="material-symbols-outlined text-base" data-icon="settings">settings</span>
+<span>System Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto bg-background p-space-md lg:p-space-xl">
+<div class="max-w-7xl mx-auto space-y-space-lg">
+<!-- Top Breadcrumb & Metadata Strip -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-xs border-b border-outline-variant/50">
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-secondary">
+<span>Fulfillment Pipeline</span>
+<span class="text-outline">/</span>
+<span class="font-mono text-on-surface font-semibold">DISPATCH-4821</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-medium">Metro General STAT</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface-container-high border border-outline-variant text-secondary text-label-sm font-label-sm font-mono">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="encrypted">encrypted</span>
+              Audit Hash: 99c7-4821-METRO
+            </span>
+<span class="text-label-sm font-label-sm text-secondary font-mono">Updated: 2m ago</span>
+</div>
+</div>
+<!-- Success / Active Dispatch Banner -->
+<section class="bg-surface-container-lowest border border-primary/40 rounded-xl p-space-lg relative overflow-hidden shadow-sm" style="box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);">
+<!-- Tactical Crimson Left Accent -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="space-y-1.5">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary-container text-white font-label-sm text-label-sm font-bold tracking-wide">
+<span class="material-symbols-outlined text-sm animate-pulse" data-icon="check_circle">check_circle</span>
+                  LIVE DISPATCH ACTIVE
+                </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface border border-outline-variant font-data-mono text-label-sm">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="bloodtype">bloodtype</span>
+                  O- Universal Concentrated RBC
+                </span>
+<span class="text-label-sm font-label-sm text-secondary font-mono">Triage Level: Code Crimson STAT</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">
+                Match Confirmed — Donor En Route to Metro General Hospital (Trauma Center)
+              </h1>
+<p class="font-body-sm text-body-sm text-secondary max-w-3xl">
+                Donor identity handshake authenticated. Cold-chain receiver team at Trauma Bay 104-B has been notified of transit progress. Digital fast-track credentials issued.
+              </p>
+</div>
+<!-- Quick Action Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<button class="inline-flex items-center gap-2 px-space-md py-2 bg-primary-container hover:bg-primary text-white rounded font-label-md text-label-md font-semibold active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-base" data-icon="call">call</span>
+<span>Call Coordinator</span>
+</button>
+<button class="inline-flex items-center gap-2 px-space-md py-2 bg-surface-container-lowest hover:bg-surface-container text-on-surface border border-outline-variant rounded font-label-md text-label-md font-semibold active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-base text-primary" data-icon="share_location">share_location</span>
+<span>Share Live ETA</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-2 text-error hover:bg-error-container/40 border border-error/40 rounded font-label-sm text-label-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="report_problem">report_problem</span>
+<span>Report Delay / Cancel</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 4-Stage Progress Tracker -->
+<section class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md pb-space-xs border-b border-outline-variant/40">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="conversion_path">conversion_path</span>
+              Fulfillment Verification Pipeline
+            </h2>
+<span class="font-data-mono text-label-sm text-secondary">Stage 3 of 4 in progress</span>
+</div>
+<!-- Stepper Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md relative">
+<!-- Stage 1: Completed -->
+<div class="p-space-md bg-surface-container-low/70 border border-outline-variant/60 rounded-lg relative">
+<div class="flex items-center justify-between mb-2">
+<span class="w-7 h-7 rounded-full bg-tertiary-container text-white flex items-center justify-center font-bold text-sm">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold">Completed ✓</span>
+</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">1. Request Matched</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Algorithm verified compatibility & antibody clearance.</p>
+<div class="mt-2 text-label-sm font-label-sm text-secondary font-mono">14:02:18 PST</div>
+</div>
+<!-- Stage 2: Completed -->
+<div class="p-space-md bg-surface-container-low/70 border border-outline-variant/60 rounded-lg relative">
+<div class="flex items-center justify-between mb-2">
+<span class="w-7 h-7 rounded-full bg-tertiary-container text-white flex items-center justify-center font-bold text-sm">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold">Completed ✓</span>
+</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">2. Donor Accepted & Contact Revealed</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Dual zero-knowledge privacy handshake unlocked.</p>
+<div class="mt-2 text-label-sm font-label-sm text-secondary font-mono">14:05:44 PST</div>
+</div>
+<!-- Stage 3: Active Now -->
+<div class="p-space-md bg-surface-container border-2 border-primary rounded-lg relative shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="w-7 h-7 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-sm ring-4 ring-error-container">
+<span class="material-symbols-outlined text-sm animate-spin" data-icon="sync">sync</span>
+</span>
+<span class="font-label-sm text-label-sm text-primary font-bold inline-flex items-center gap-1">
+<span class="inline-block w-2 h-2 rounded-full bg-primary animate-ping"></span>
+                  Active Now ◉
+                </span>
+</div>
+<div class="font-label-md text-label-md font-bold text-primary">3. En Route & Check-in</div>
+<div class="mt-1 font-headline-sm text-headline-sm font-extrabold text-on-surface">
+                Estimated Arrival: 14 mins
+              </div>
+<div class="mt-2 text-label-sm font-label-sm text-secondary font-mono">Transit telemetry verified via GPS</div>
+</div>
+<!-- Stage 4: Upcoming -->
+<div class="p-space-md bg-surface-container-lowest border border-outline-variant/40 rounded-lg relative opacity-70">
+<div class="flex items-center justify-between mb-2">
+<span class="w-7 h-7 rounded-full bg-surface-variant text-secondary flex items-center justify-center font-bold text-sm">
+                  4
+                </span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Upcoming</span>
+</div>
+<div class="font-label-md text-label-md font-bold text-secondary">4. Blood Bank Intake & Cooldown Lock</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Phlebotomy draw, chain-of-custody transfer & 90-day rest lockout.</p>
+<div class="mt-2 text-label-sm font-label-sm text-secondary font-mono">Pending arrival</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Main Tactical Details -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column (8 cols): Unlocked Two-Way Contact Card + Navigation Directions -->
+<div class="lg:col-span-8 space-y-space-lg">
+<!-- Unlocked Two-Way Contact Details Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-lg shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-2 pb-space-sm border-b border-outline-variant/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="lock_open">lock_open</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Unlocked Two-Way Contact Details</h3>
+<p class="font-body-sm text-body-sm text-secondary">Privacy Handshake Complete • Clinical Data Isolation Level Tier-1</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-tertiary/10 text-tertiary rounded text-label-sm font-label-sm font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+                  Mutual Agreement Authenticated
+                </span>
+</div>
+<!-- Two Column Contact Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg mt-space-md">
+<!-- Party A: Donor Details Revealed to Hospital -->
+<div class="p-space-md rounded-lg bg-surface-container-low border border-outline-variant/60 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Donor Profile</span>
+</div>
+<span class="font-mono text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded">ID: #D-4821</span>
+</div>
+<div class="mt-space-md space-y-space-sm">
+<div>
+<div class="text-label-sm font-label-sm text-secondary">Full Legal Name</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">Alex Morgan</div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<div>
+<div class="text-label-sm font-label-sm text-secondary">Direct Mobile</div>
+<a class="font-data-mono text-body-md text-primary font-bold hover:underline flex items-center gap-1" href="tel:+15550194821">
+<span class="material-symbols-outlined text-sm" data-icon="phone_enabled">phone_enabled</span>
+                            +1 (555) 019-4821
+                          </a>
+</div>
+<div>
+<div class="text-label-sm font-label-sm text-secondary">Blood Type</div>
+<span class="inline-block mt-0.5 px-2.5 py-0.5 rounded bg-primary text-white font-mono font-bold text-xs">O- Negative (STAT)</span>
+</div>
+</div>
+<div class="pt-2 border-t border-outline-variant/40">
+<div class="text-label-sm font-label-sm text-secondary">Vehicle & Parking Tag</div>
+<div class="font-body-md text-body-md text-on-surface font-semibold flex items-center gap-2 mt-0.5">
+<span class="material-symbols-outlined text-secondary text-base" data-icon="directions_car">directions_car</span>
+<span>Blue Civic (Plate: 4KY-291)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-2 border-t border-outline-variant/40 flex items-center justify-between text-label-sm font-label-sm text-secondary">
+<span>Identity check: Physical ID verified</span>
+<span class="text-tertiary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span> Pass
+                    </span>
+</div>
+</div>
+<!-- Party B: Hospital Blood Bank Intake Desk -->
+<div class="p-space-md rounded-lg bg-surface-container-low border border-outline-variant/60 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="local_hospital">local_hospital</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Intake Desk Receiving Unit</span>
+</div>
+<span class="font-mono text-label-sm text-primary font-bold bg-error-container/50 px-2 py-0.5 rounded">STAT STATION</span>
+</div>
+<div class="mt-space-md space-y-space-sm">
+<div>
+<div class="text-label-sm font-label-sm text-secondary">Receiving Nurse Supervisor</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">Nurse Supervisor Sarah Chen, RN</div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<div>
+<div class="text-label-sm font-label-sm text-secondary">Blood Bank Direct Line</div>
+<a class="font-data-mono text-body-md text-primary font-bold hover:underline flex items-center gap-1" href="tel:+15558832940">
+<span class="material-symbols-outlined text-sm" data-icon="call">call</span>
+                            +1 (555) 883-2940
+                          </a>
+</div>
+<div>
+<div class="text-label-sm font-label-sm text-secondary">Designated Unit</div>
+<div class="font-data-mono text-body-md text-on-surface font-bold">Intake Room 104-B</div>
+</div>
+</div>
+<div class="pt-2 border-t border-outline-variant/40">
+<div class="text-label-sm font-label-sm text-secondary">Hospital Department</div>
+<div class="font-body-md text-body-md text-on-surface font-semibold flex items-center gap-2 mt-0.5">
+<span class="material-symbols-outlined text-secondary text-base" data-icon="domain">domain</span>
+<span>Metro General Hospital • Level 1 Trauma Center</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-2 border-t border-outline-variant/40 flex items-center justify-between text-label-sm font-label-sm text-secondary">
+<span>Phlebotomy Bed #02 Reserved</span>
+<span class="text-primary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs" data-icon="timer">timer</span> Ready for donor
+                    </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Hospital Navigation and Access Directions -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center gap-2 pb-space-sm border-b border-outline-variant/50">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="navigation">navigation</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Hospital Navigation & Access Directions</h3>
+<p class="font-body-sm text-body-sm text-secondary">Follow priority clinical corridor guidelines upon vehicular arrival.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mt-space-md">
+<div class="p-space-sm rounded border border-outline-variant/50 bg-surface-container-low flex gap-space-sm items-start">
+<span class="material-symbols-outlined text-primary text-2xl shrink-0 mt-0.5" data-icon="signpost">signpost</span>
+<div>
+<div class="font-label-md text-label-md font-bold text-on-surface">Arrival Gate</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1">
+                      Use North Ambulance Bay entrance; parking voucher validated upon check-in.
+                    </p>
+</div>
+</div>
+<div class="p-space-sm rounded border border-outline-variant/50 bg-surface-container-low flex gap-space-sm items-start">
+<span class="material-symbols-outlined text-primary text-2xl shrink-0 mt-0.5" data-icon="local_parking">local_parking</span>
+<div>
+<div class="font-label-md text-label-md font-bold text-on-surface">Reserved Stalls</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1">
+                      Bays 12-14 designated for Emergency Blood Donors. Flashing beacon indicates stall availability.
+                    </p>
+</div>
+</div>
+<div class="p-space-sm rounded border border-outline-variant/50 bg-surface-container-low flex gap-space-sm items-start">
+<span class="material-symbols-outlined text-primary text-2xl shrink-0 mt-0.5" data-icon="door_front">door_front</span>
+<div>
+<div class="font-label-md text-label-md font-bold text-on-surface">Internal Access</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1">
+                      Proceed through Door 4 to Corridor B. Tap Digital Fast-Track QR at Reader Station 104.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Post-Donation Safety Notice -->
+<div class="bg-surface-container-low border border-outline-variant/80 rounded-xl p-space-md flex items-start gap-space-md">
+<span class="material-symbols-outlined text-primary text-2xl shrink-0 mt-1" data-icon="health_and_safety">health_and_safety</span>
+<div class="space-y-1">
+<div class="font-label-md text-label-md font-bold text-on-surface">Post-Donation Safety & Compliance Notice</div>
+<p class="font-body-sm text-body-sm text-secondary leading-relaxed">
+                  Upon completion, your profile will enter the mandatory 90-day cooldown period. No broadcasts will reach you during recovery. Institutional regulations strictly preserve biological integrity and donor physical wellness.
+                </p>
+</div>
+</div>
+</div>
+<!-- Right Column (4 cols): Fast-Track Digital Pass + Cold-Chain Telemetry -->
+<div class="lg:col-span-4 space-y-space-lg">
+<!-- Fast-Track Digital Pass (QR Card) -->
+<div class="bg-surface-container-lowest border-2 border-primary/60 rounded-xl p-space-lg shadow-sm flex flex-col items-center text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 left-0 bg-primary py-1 text-white font-mono text-label-sm uppercase tracking-widest font-bold">
+                PRIORITY CLINICAL ACCESS PASS
+              </div>
+<div class="mt-4 w-full">
+<span class="text-label-sm font-label-sm text-secondary font-mono">TOKEN SERIAL NUMBER</span>
+<div class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight font-mono mt-0.5">
+                  #HEMO-4821-METRO
+                </div>
+</div>
+<!-- High Contrast Live QR Code Component (CSS-Generated Matrix for 100% Reliability) -->
+<div class="mt-space-md p-3 bg-white border-2 border-on-surface rounded-lg shadow-sm">
+<!-- QR visual grid layout -->
+<div class="w-44 h-44 bg-surface-container-lowest grid grid-cols-6 grid-rows-6 gap-1 p-2 border border-outline-variant">
+<!-- QR Corner Finder 1 -->
+<div class="col-span-2 row-span-2 bg-on-surface p-1 flex items-center justify-center">
+<div class="w-full h-full bg-white flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-on-surface"></div>
+</div>
+</div>
+<div class="bg-on-surface"></div>
+<div class="bg-transparent"></div>
+<!-- QR Corner Finder 2 -->
+<div class="col-span-2 row-span-2 bg-on-surface p-1 flex items-center justify-center">
+<div class="w-full h-full bg-white flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-on-surface"></div>
+</div>
+</div>
+<div class="bg-on-surface"></div>
+<div class="bg-on-surface"></div>
+<div class="bg-transparent"></div>
+<div class="bg-on-surface"></div>
+<div class="bg-on-surface"></div>
+<div class="bg-on-surface"></div>
+<div class="bg-transparent"></div>
+<!-- QR Center Pattern -->
+<div class="col-span-2 row-span-2 bg-primary p-1 flex items-center justify-center">
+<div class="w-full h-full bg-white flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-primary"></div>
+</div>
+</div>
+<div class="bg-on-surface"></div>
+<div class="bg-transparent"></div>
+<!-- QR Corner Finder 3 -->
+<div class="col-span-2 row-span-2 bg-on-surface p-1 flex items-center justify-center">
+<div class="w-full h-full bg-white flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-on-surface"></div>
+</div>
+</div>
+<div class="bg-on-surface"></div>
+<div class="bg-transparent"></div>
+<div class="bg-on-surface"></div>
+<div class="bg-on-surface"></div>
+</div>
+</div>
+<!-- Pass Usage Instructions -->
+<div class="mt-space-md space-y-1">
+<div class="font-label-md text-label-md font-bold text-on-surface">Contactless Check-In Ready</div>
+<p class="font-body-sm text-body-sm text-secondary">
+                  Present this pass at Blood Bank Intake Room 104-B scanner for instant door release and reception priority.
+                </p>
+</div>
+<!-- Security Watermark Tag -->
+<div class="mt-space-md w-full pt-space-sm border-t border-outline-variant/60 flex items-center justify-between text-label-sm font-label-sm font-mono text-secondary">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-tertiary" data-icon="bolt">bolt</span>
+                  Live Token Active
+                </span>
+<span>Exp: 45m</span>
+</div>
+</div>
+<!-- Cold-Chain & Station Readiness Widget -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/50">
+<span class="font-label-md text-label-md font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="thermostat">thermostat</span>
+                  Cold-Chain & Unit Setup
+                </span>
+<span class="text-tertiary font-bold text-xs bg-tertiary-fixed/30 px-2 py-0.5 rounded">STANDBY OK</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant/40">
+<div class="text-label-sm font-label-sm text-secondary">Cold Storage Cell</div>
+<div class="font-data-mono text-headline-sm text-on-surface font-bold mt-0.5">+3.8°C</div>
+<div class="text-[11px] text-tertiary font-mono">Range: +2°C to +6°C</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant/40">
+<div class="text-label-sm font-label-sm text-secondary">Intake Kit #09</div>
+<div class="font-data-mono text-headline-sm text-on-surface font-bold mt-0.5">Sterilized</div>
+<div class="text-[11px] text-secondary font-mono">Lot #4992-TX</div>
+</div>
+</div>
+<div class="text-body-sm font-body-sm text-secondary bg-surface-container-low/50 p-2.5 rounded border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-primary" data-icon="info">info</span>
+<span>Phlebotomist on site and assigned to Alex Morgan.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom Navigation (Responsive Anchor from Design System) -->
+<nav class="md:hidden sticky bottom-0 z-50 bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant flex items-center justify-around h-16 px-2">
+<a class="flex flex-col items-center gap-0.5 text-secondary hover:text-on-surface" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="assignment_add">assignment_add</span>
+<span class="text-label-sm font-label-sm">Intake</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-secondary hover:text-on-surface" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="radar">radar</span>
+<span class="text-label-sm font-label-sm">Command</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-primary font-bold" href="#">
+<span class="material-symbols-outlined text-xl material-symbols-fill" data-icon="emergency_home">emergency_home</span>
+<span class="text-label-sm font-label-sm">Fulfillment</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-secondary hover:text-on-surface" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="vital_signs">vital_signs</span>
+<span class="text-label-sm font-label-sm">Health</span>
+</a>
+</nav>
+</body></html>
