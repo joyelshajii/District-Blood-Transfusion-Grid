@@ -568,52 +568,111 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
 
               </div>
 
-              {/* UNMASKED CONTACT AUTHORIZATION SLIP (Renders when volunteer accepts!) */}
+              {/* FULFILLMENT COORDINATION HUB & UNMASKED CONTACT DESK (Design: 4._matched_coordination_fulfillment) */}
               {acceptedContacts.length > 0 && (
-                <div className="workbench-panel border-emerald-300 bg-emerald-50/40 p-4 sm:p-5 space-y-3">
-                  <div className="flex items-center justify-between pb-2 border-b border-emerald-200">
-                    <div className="flex items-center space-x-2 text-emerald-900 font-bold text-sm">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-700" />
-                      <span>Volunteer Consent Confirmed &bull; Contact Unmasked</span>
+                <div className="workbench-panel border-[#047857]/40 bg-[#f0fdf4]/50 p-4 sm:p-5 space-y-4 shadow-sm relative overflow-hidden">
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#047857]"></div>
+                  
+                  {/* Top Fulfillment Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-emerald-200/80 gap-3 pl-1">
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#047857] animate-ping"></span>
+                        <h4 className="font-headline font-bold text-sm text-[#00402d] uppercase tracking-wide">
+                          Fulfillment Hub &bull; Match Confirmed &amp; Contact Unmasked
+                        </h4>
+                        <span className="badge badge-eligible">
+                          Statutory Consent Granted
+                        </span>
+                      </div>
+                      <p className="text-xs text-[#00402d] mt-1">
+                        Donor identity handshake authenticated. Contact information is unlocked exclusively for the hospital transfusion desk.
+                      </p>
                     </div>
-                    <span className="badge badge-eligible">
-                      Statutory Consent Granted
-                    </span>
+
+                    <div className="flex items-center gap-2 font-mono text-[11px] text-[#00402d] bg-white px-2.5 py-1 rounded border border-emerald-200">
+                      <span className="material-symbols-outlined text-xs text-[#047857]">ac_unit</span>
+                      <span>Cold-Chain: +4°C ± 2°C Compliant</span>
+                    </div>
                   </div>
 
-                  <p className="text-xs text-emerald-950">
-                    The matched volunteer has explicitly confirmed acceptance. Contact information is now authorized and unlocked exclusively for the hospital desk:
-                  </p>
+                  {/* 4-Stage Fulfillment Verification Pipeline Tracker */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-xs pl-1">
+                    <div className="p-2.5 bg-white rounded border border-emerald-200 shadow-2xs">
+                      <div className="flex items-center justify-between text-[#047857]">
+                        <span className="text-[10px] font-mono font-bold uppercase">Stage 1</span>
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="font-semibold text-[#0d1c2f] mt-1 text-[11px]">Requisition Dispatched</div>
+                      <div className="text-[10px] text-[#565e74]">Tokenized Broadcast</div>
+                    </div>
 
-                  <div className="space-y-3">
+                    <div className="p-2.5 bg-white rounded border border-emerald-200 shadow-2xs">
+                      <div className="flex items-center justify-between text-[#047857]">
+                        <span className="text-[10px] font-mono font-bold uppercase">Stage 2</span>
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="font-semibold text-[#0d1c2f] mt-1 text-[11px]">Volunteer Accepted</div>
+                      <div className="text-[10px] text-[#047857] font-semibold">Consent Confirmed</div>
+                    </div>
+
+                    <div className="p-2.5 bg-[#eff4ff] rounded border border-[#991b1b]/30 shadow-2xs">
+                      <div className="flex items-center justify-between text-[#991b1b]">
+                        <span className="text-[10px] font-mono font-bold uppercase">Stage 3</span>
+                        <span className="w-2 h-2 rounded-full bg-[#991b1b] animate-pulse"></span>
+                      </div>
+                      <div className="font-semibold text-[#0d1c2f] mt-1 text-[11px]">In Transit / En Route</div>
+                      <div className="text-[10px] text-[#991b1b] font-medium">Fast-Track Entry Issued</div>
+                    </div>
+
+                    <div className="p-2.5 bg-white rounded border border-slate-200 text-[#565e74]">
+                      <div className="flex items-center justify-between text-slate-400">
+                        <span className="text-[10px] font-mono font-bold uppercase">Stage 4</span>
+                        <span className="material-symbols-outlined text-xs">hourglass_empty</span>
+                      </div>
+                      <div className="font-semibold text-slate-700 mt-1 text-[11px]">Phlebotomy &amp; Triage</div>
+                      <div className="text-[10px] text-slate-400">Standby at Bay</div>
+                    </div>
+                  </div>
+
+                  {/* Unmasked Donor Contact Cards */}
+                  <div className="space-y-2.5 pl-1">
                     {acceptedContacts.map((c) => (
                       <div
                         key={c.dispatch_id}
-                        className="bg-white p-4 rounded border border-emerald-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                        className="bg-white p-4 rounded-lg border border-emerald-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                       >
                         <div className="space-y-1">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-sm font-bold text-slate-900">{c.full_name}</span>
-                            <span className="font-mono text-xs px-1.5 py-0.5 bg-slate-100 text-slate-700 rounded border border-slate-200">
+                          <div className="flex items-center space-x-2 flex-wrap">
+                            <span className="text-sm font-bold text-[#0d1c2f] font-headline">{c.full_name}</span>
+                            <span className="font-mono text-xs px-1.5 py-0.5 bg-[#eff4ff] text-[#0d1c2f] rounded border border-[#cbd5e1]">
                               {c.donor_code}
                             </span>
-                            <span className="text-xs font-bold text-red-700 font-mono">{c.blood_group}</span>
+                            <span className="px-2 py-0.5 rounded bg-[#991b1b] text-white font-mono font-bold text-xs">
+                              {c.blood_group}
+                            </span>
+                            <span className="text-[10px] font-mono text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                              PASS #COMM-{c.donor_code.replace(/[^0-9]/g, '') || '4821'}
+                            </span>
                           </div>
 
-                          <div className="text-xs text-slate-700 flex flex-wrap items-center gap-x-4 gap-y-1 pt-1">
-                            <span className="flex items-center space-x-1 font-mono font-bold text-emerald-800 text-sm">
-                              <Phone className="w-3.5 h-3.5 text-emerald-700" />
+                          <div className="text-xs text-[#0d1c2f] flex flex-wrap items-center gap-x-4 gap-y-1 pt-1">
+                            <span className="flex items-center space-x-1 font-mono font-bold text-[#047857] text-sm">
+                              <Phone className="w-3.5 h-3.5 text-[#047857]" />
                               <a href={`tel:${c.phone}`} className="hover:underline">
                                 {c.phone}
                               </a>
                             </span>
-                            <span className="text-slate-500 font-mono">{c.email}</span>
-                            <span className="text-slate-600 font-medium">ETA: {c.estimated_eta}</span>
+                            <span className="text-[#565e74] font-mono">{c.email}</span>
+                            <span className="text-[#0d1c2f] font-semibold bg-[#eff4ff] px-2 py-0.5 rounded border border-[#cbd5e1]">
+                              Estimated ETA: {c.estimated_eta}
+                            </span>
                           </div>
 
                           {c.donor_note && (
-                            <div className="text-xs text-slate-600 italic pt-1">
-                              Volunteer note: "{c.donor_note}"
+                            <div className="text-xs text-[#565e74] italic pt-1 flex items-center gap-1">
+                              <span className="material-symbols-outlined text-xs text-[#047857]">comment</span>
+                              <span>Volunteer statement: "{c.donor_note}"</span>
                             </div>
                           )}
                         </div>
@@ -621,10 +680,10 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                         <div className="flex items-center space-x-2 shrink-0">
                           <a
                             href={`tel:${c.phone}`}
-                            className="btn-success text-xs py-1.5 px-3 flex items-center space-x-1.5"
+                            className="btn-success text-xs py-2 px-3.5 flex items-center space-x-1.5 shadow-sm"
                           >
                             <Phone className="w-3.5 h-3.5" />
-                            <span>Call Volunteer</span>
+                            <span>Call Volunteer Directly</span>
                           </a>
                         </div>
                       </div>
@@ -812,40 +871,47 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                   </div>
 
                   {/* Deferral Rationale & Spam Prevention Proof (Expandable) */}
-                  <div className="pt-3 border-t border-slate-200">
+                  <div className="pt-3 border-t border-[#cbd5e1]">
                     <button
                       onClick={() => setShowIneligibleTable(!showIneligibleTable)}
-                      className="flex items-center space-x-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 select-none"
+                      className="flex items-center space-x-2 text-xs font-bold text-[#0d1c2f] hover:text-[#991b1b] select-none transition-colors"
                     >
-                      <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
-                      <span>
+                      <span className="material-symbols-outlined text-base text-amber-600">
+                        shield
+                      </span>
+                      <span className="font-headline uppercase tracking-wider">
                         Spam Prevention Proof: {analysis.ineligible_candidates.length} Ineligible Donors Filtered Out
                       </span>
-                      <span className="text-[11px] text-slate-500 font-normal">
-                        ({showIneligibleTable ? 'Hide details' : 'Show audit breakdown'})
+                      <span className="text-[11px] text-[#565e74] font-normal font-mono">
+                        ({showIneligibleTable ? 'Hide audit breakdown' : 'Show audit breakdown'})
                       </span>
                     </button>
 
                     {showIneligibleTable && (
-                      <div className="mt-3 overflow-x-auto border border-slate-200 rounded max-h-56 overflow-y-auto">
-                        <table className="min-w-full divide-y divide-slate-200 text-[11px]">
-                          <thead className="bg-slate-50 text-slate-600 font-semibold sticky top-0">
+                      <div className="mt-3 overflow-x-auto border border-[#cbd5e1] rounded-lg max-h-64 overflow-y-auto">
+                        <table className="min-w-full divide-y divide-[#cbd5e1] text-xs">
+                          <thead className="bg-[#f8f9ff] text-[#0d1c2f] font-semibold sticky top-0">
                             <tr>
-                              <th className="py-1.5 px-3 text-left">Code</th>
-                              <th className="py-1.5 px-2 text-left">Blood</th>
-                              <th className="py-1.5 px-2 text-left">Distance</th>
-                              <th className="py-1.5 px-3 text-left">Reason Filtered Out (WhatsApp Spam Prevented)</th>
+                              <th className="py-2 px-3 text-left">Masked Token</th>
+                              <th className="py-2 px-2 text-left">Blood</th>
+                              <th className="py-2 px-2 text-left">Distance</th>
+                              <th className="py-2 px-3 text-left">Clinical Exclusion Reason (Spam Prevented)</th>
                             </tr>
                           </thead>
-                          <tbody className="divide-y divide-slate-100 bg-white">
+                          <tbody className="divide-y divide-[#cbd5e1]/60 bg-white">
                             {analysis.ineligible_candidates.map((c) => (
-                              <tr key={c.donor_id} className="text-slate-600">
-                                <td className="py-1.5 px-3 font-mono text-slate-800">{c.code_name}</td>
-                                <td className="py-1.5 px-2 font-mono font-bold">{c.blood_group}</td>
-                                <td className="py-1.5 px-2 font-mono">{c.distance_km} km</td>
-                                <td className="py-1.5 px-3 text-red-700">
-                                  {c.ineligibility_reason || 'Clinical cooldown active'}
-                                  {c.remaining_cooldown_days > 0 && ` (${c.remaining_cooldown_days} days cooldown remaining)`}
+                              <tr key={c.donor_id} className="text-[#0d1c2f] hover:bg-[#f8f9ff] transition-colors">
+                                <td className="py-2 px-3 font-mono font-medium text-[#0d1c2f]">{c.code_name}</td>
+                                <td className="py-2 px-2 font-mono font-bold text-[#991b1b]">{c.blood_group}</td>
+                                <td className="py-2 px-2 font-mono text-[#565e74]">{c.distance_km} km</td>
+                                <td className="py-2 px-3">
+                                  <span className="inline-flex items-center gap-1 text-[#991b1b] bg-[#fef2f2] px-2 py-0.5 rounded border border-[#fecaca] text-[11px] font-medium">
+                                    <span className="material-symbols-outlined text-xs">block</span>
+                                    <span>
+                                      {c.ineligibility_reason || 'Clinical recovery interval active'}
+                                      {c.remaining_cooldown_days > 0 && ` (${c.remaining_cooldown_days}d cooldown remaining)`}
+                                    </span>
+                                  </span>
                                 </td>
                               </tr>
                             ))}
