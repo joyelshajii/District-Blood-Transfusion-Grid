@@ -17,10 +17,14 @@ import {
   Heart,
   Navigation,
   Printer,
-  Download
+  Download,
+  Bell,
+  Volume2
 } from 'lucide-react';
 import { QRCodeSVG } from '../utils/qrCode';
 import { BarcodeSVG } from '../utils/barcode';
+import { pushNotifications } from '../utils/pushNotification';
+import { soundEngine } from '../utils/soundEngine';
 
 interface DonorSimulationPortalProps {
   initialToken?: string;
@@ -40,6 +44,7 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
   const [donorNote, setDonorNote] = useState<string>('Can reach hospital in 25 minutes.');
   const [selectedEta, setSelectedEta] = useState<string>('25 mins');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [pushPerm, setPushPerm] = useState<string>(pushNotifications.getPermission());
 
   useEffect(() => {
     loadDonors();
@@ -69,6 +74,9 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
       const data = await api.getDonorDispatch(token.trim());
       setDispatchData(data);
       setResponseStatus(data.status);
+      if (data.status === 'PENDING') {
+        soundEngine.playCodeCrimsonAlert();
+      }
     } catch (err: any) {
       setErrorMessage(err.message || 'Invalid or expired dispatch token');
       setDispatchData(null);
@@ -84,6 +92,9 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
       const res = await api.respondToDispatch(dispatchData.token, action, `${donorNote} (ETA: ${selectedEta})`);
       setResponseStatus(res.status);
       setDispatchData({ ...dispatchData, status: res.status });
+      if (action === 'ACCEPT') {
+        soundEngine.playAcceptanceSuccessChime();
+      }
     } catch (err: any) {
       alert(err.message || 'Failed to submit response');
     } finally {
@@ -445,6 +456,57 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
                       You are receiving this alert because your <strong className="text-[#991b1b]">{dispatchData.blood_group_required}</strong> blood group matches an urgent clinical demand and you have completed your mandatory statutory donation interval.
                     </p>
                   </div>
+                </div>
+              </div>
+
+              {/* Browser Push & Acoustic Notification Telemetry Bar */}
+              <div className="bg-white rounded-lg border border-[#cbd5e1] p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-2xs">
+                <div className="flex items-center space-x-2.5">
+                  <span className="w-7 h-7 rounded-lg bg-red-100 text-[#991b1b] flex items-center justify-center shrink-0 border border-red-200">
+                    <Bell className="w-3.5 h-3.5" />
+                  </span>
+                  <div>
+                    <span className="font-bold text-[#0d1c2f] block text-[11px]">Emergency Dispatch Push Telemetry</span>
+                    <span className="text-[10px] text-[#565e74]">Status: {pushPerm === 'granted' ? 'Native OS Push Active' : 'Browser Pings Not Authorized'}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  {pushPerm !== 'granted' ? (
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        const perm = await pushNotifications.requestPermission();
+                        setPushPerm(perm);
+                      }}
+                      className="btn-primary text-xs py-1 px-2.5 flex items-center space-x-1 cursor-pointer"
+                    >
+                      <Bell className="w-3 h-3" />
+                      <span>Authorize Pings</span>
+                    </button>
+                  ) : (
+                    <span className="text-emerald-700 font-bold text-[11px] font-mono flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                      <span>PUSH ACTIVE</span>
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      pushNotifications.triggerEmergencyAlert({
+                        caseNumber: `REQ-EKM-2026-${dispatchData.token.slice(0, 4).toUpperCase()}`,
+                        bloodGroup: dispatchData.blood_group_required,
+                        hospitalName: dispatchData.hospital_name,
+                        hospitalTaluk: dispatchData.hospital_taluk,
+                        distanceKm: dispatchData.distance_km,
+                      });
+                    }}
+                    className="btn-secondary text-xs py-1 px-2.5 flex items-center space-x-1 cursor-pointer"
+                    title="Test emergency browser push ping and acoustic chime"
+                  >
+                    <Volume2 className="w-3 h-3 text-[#991b1b]" />
+                    <span>Test Ping</span>
+                  </button>
                 </div>
               </div>
 
