@@ -20,8 +20,11 @@ import {
   Check,
   Building2,
   FileSpreadsheet,
-  X
+  X,
+  Scan,
+  QrCode
 } from 'lucide-react';
+import { QRVoucherScanner, VerifiedVoucherPayload } from '../components/QRVoucherScanner';
 
 interface HospitalDashboardProps {
   onNavigateToDonorSimulator: (token?: string) => void;
@@ -50,6 +53,8 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [urgencyFilter, setUrgencyFilter] = useState('ALL');
   const [showIneligibleTable, setShowIneligibleTable] = useState(false);
+  const [scannerOpen, setScannerOpen] = useState(false);
+  const [verifiedVouchers, setVerifiedVouchers] = useState<Record<string, VerifiedVoucherPayload>>({});
 
   // New request form state
   const [newReq, setNewReq] = useState({
@@ -590,9 +595,20 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2 font-mono text-[11px] text-[#00402d] bg-white px-2.5 py-1 rounded border border-emerald-200">
-                      <span className="material-symbols-outlined text-xs text-[#047857]">ac_unit</span>
-                      <span>Cold-Chain: +4°C ± 2°C Compliant</span>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        onClick={() => setScannerOpen(true)}
+                        className="btn-primary text-xs py-1.5 px-3 flex items-center space-x-1.5 shadow-xs cursor-pointer"
+                        title="Scan donor's digital QR admission voucher or enter token"
+                      >
+                        <Scan className="w-3.5 h-3.5" />
+                        <span>Scan Admission Voucher</span>
+                      </button>
+
+                      <div className="flex items-center gap-2 font-mono text-[11px] text-[#00402d] bg-white px-2.5 py-1 rounded border border-emerald-200">
+                        <span className="material-symbols-outlined text-xs text-[#047857]">ac_unit</span>
+                        <span>Cold-Chain: +4°C ± 2°C Compliant</span>
+                      </div>
                     </div>
                   </div>
 
@@ -616,23 +632,45 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                       <div className="text-[10px] text-[#047857] font-semibold">Consent Confirmed</div>
                     </div>
 
-                    <div className="p-2.5 bg-[#eff4ff] rounded border border-[#991b1b]/30 shadow-2xs">
-                      <div className="flex items-center justify-between text-[#991b1b]">
-                        <span className="text-[10px] font-mono font-bold uppercase">Stage 3</span>
-                        <span className="w-2 h-2 rounded-full bg-[#991b1b] animate-pulse"></span>
+                    {verifiedVouchers[selectedRequest.id] ? (
+                      <div className="p-2.5 bg-emerald-500/10 rounded border border-emerald-500/30 shadow-2xs">
+                        <div className="flex items-center justify-between text-emerald-800">
+                          <span className="text-[10px] font-mono font-bold uppercase">Stage 3</span>
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                        </div>
+                        <div className="font-semibold text-emerald-950 mt-1 text-[11px]">Arrived at Facility</div>
+                        <div className="text-[10px] text-emerald-800 font-mono font-bold">QR Voucher Verified</div>
                       </div>
-                      <div className="font-semibold text-[#0d1c2f] mt-1 text-[11px]">In Transit / En Route</div>
-                      <div className="text-[10px] text-[#991b1b] font-medium">Fast-Track Entry Issued</div>
-                    </div>
+                    ) : (
+                      <div className="p-2.5 bg-[#eff4ff] rounded border border-[#991b1b]/30 shadow-2xs">
+                        <div className="flex items-center justify-between text-[#991b1b]">
+                          <span className="text-[10px] font-mono font-bold uppercase">Stage 3</span>
+                          <span className="w-2 h-2 rounded-full bg-[#991b1b] animate-pulse"></span>
+                        </div>
+                        <div className="font-semibold text-[#0d1c2f] mt-1 text-[11px]">In Transit / En Route</div>
+                        <div className="text-[10px] text-[#991b1b] font-medium">Fast-Track Entry Issued</div>
+                      </div>
+                    )}
 
-                    <div className="p-2.5 bg-white rounded border border-slate-200 text-[#565e74]">
-                      <div className="flex items-center justify-between text-slate-400">
-                        <span className="text-[10px] font-mono font-bold uppercase">Stage 4</span>
-                        <span className="material-symbols-outlined text-xs">hourglass_empty</span>
+                    {verifiedVouchers[selectedRequest.id] ? (
+                      <div className="p-2.5 bg-emerald-500/10 rounded border border-emerald-500/40 shadow-2xs">
+                        <div className="flex items-center justify-between text-emerald-800">
+                          <span className="text-[10px] font-mono font-bold uppercase">Stage 4</span>
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        </div>
+                        <div className="font-semibold text-emerald-950 mt-1 text-[11px]">Phlebotomy Active</div>
+                        <div className="text-[10px] text-emerald-800 font-bold">Bay #02 Cleared</div>
                       </div>
-                      <div className="font-semibold text-slate-700 mt-1 text-[11px]">Phlebotomy &amp; Triage</div>
-                      <div className="text-[10px] text-slate-400">Standby at Bay</div>
-                    </div>
+                    ) : (
+                      <div className="p-2.5 bg-white rounded border border-slate-200 text-[#565e74]">
+                        <div className="flex items-center justify-between text-slate-400">
+                          <span className="text-[10px] font-mono font-bold uppercase">Stage 4</span>
+                          <span className="material-symbols-outlined text-xs">hourglass_empty</span>
+                        </div>
+                        <div className="font-semibold text-slate-700 mt-1 text-[11px]">Phlebotomy &amp; Triage</div>
+                        <div className="text-[10px] text-slate-400">Standby at Bay</div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Unmasked Donor Contact Cards */}
@@ -678,6 +716,22 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                         </div>
 
                         <div className="flex items-center space-x-2 shrink-0">
+                          {verifiedVouchers[selectedRequest.id] ? (
+                            <span className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-950 font-bold rounded-lg text-xs">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                              <span>On-Site ({verifiedVouchers[selectedRequest.id].checkInTime})</span>
+                            </span>
+                          ) : (
+                            <button
+                              onClick={() => setScannerOpen(true)}
+                              className="btn-secondary text-xs py-1.5 px-2.5 flex items-center space-x-1.5 cursor-pointer"
+                              title="Verify donor admission pass"
+                            >
+                              <Scan className="w-3.5 h-3.5 text-primary" />
+                              <span>Verify QR</span>
+                            </button>
+                          )}
+
                           <a
                             href={`tel:${c.phone}`}
                             className="btn-success text-xs py-2 px-3.5 flex items-center space-x-1.5 shadow-sm"
@@ -1236,6 +1290,26 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
 
           </div>
         </div>
+      )}
+
+      {/* On-Site Admission QR Voucher Scanner Desk Modal */}
+      {selectedRequest && (
+        <QRVoucherScanner
+          isOpen={scannerOpen}
+          onClose={() => setScannerOpen(false)}
+          expectedCaseNumber={selectedRequest.case_number}
+          expectedBloodGroup={selectedRequest.blood_group}
+          onVoucherVerified={(v) => {
+            setVerifiedVouchers((prev) => ({
+              ...prev,
+              [selectedRequest.id]: v,
+            }));
+            setActionMessage({
+              type: 'success',
+              text: `Admission voucher authenticated for ${v.donorCode}. On-site reception logged.`,
+            });
+          }}
+        />
       )}
 
     </div>
