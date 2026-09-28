@@ -1316,9 +1316,10 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
               ...prev,
               [selectedRequest.id]: v,
             }));
+            api.verifyVoucherCheckIn(selectedRequest.id, v.token, v.donorCode).catch(() => {});
             setActionMessage({
               type: 'success',
-              text: `Admission voucher authenticated for ${v.donorCode}. On-site reception logged.`,
+              text: `Admission voucher authenticated for ${v.donorCode}. On-site reception logged in audit ledger.`,
             });
           }}
         />

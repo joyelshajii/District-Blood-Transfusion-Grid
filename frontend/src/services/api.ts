@@ -221,4 +221,14 @@ export const api = {
     if (!res.ok) throw new Error('Failed to fetch audit logs');
     return res.json();
   },
+
+  async verifyVoucherCheckIn(requestId: string, voucherToken: string, donorCode: string, bay: string = 'BAY #02'): Promise<any> {
+    const res = await fetch(`${API_BASE}/requests/${requestId}/checkin`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ voucher_token: voucherToken, donor_code: donorCode, bay }),
+    });
+    if (!res.ok) throw new Error('Failed to verify voucher on-site');
+    return res.json();
+  },
 };

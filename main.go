@@ -97,6 +97,11 @@ func main() {
 			case "accepted-donors":
 				handler.GetAcceptedDonors(w, r)
 				return
+			case "checkin":
+				if r.Method == http.MethodPost {
+					handler.VerifyVoucherCheckIn(w, r)
+					return
+				}
 			}
 		}
 
