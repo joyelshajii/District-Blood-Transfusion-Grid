@@ -14,7 +14,12 @@ import {
   Cpu,
   Globe,
   Radio,
-  FileCode2
+  FileCode2,
+  Scan,
+  QrCode,
+  FileText,
+  Volume2,
+  Thermometer
 } from 'lucide-react';
 
 export const ArchitectureGuide: React.FC = () => {
@@ -213,6 +218,67 @@ export const ArchitectureGuide: React.FC = () => {
             <div>&bull; Donor verifies hospital identity, distance, and parking fast-track voucher.</div>
             <div>&bull; Volunteer confirms: contact is unmasked exclusively on the treating hospital desk.</div>
             <div className="text-slate-400">&bull; Audit ledger logs immutable consent event with microsecond timestamp.</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Real-Time Optical Verification & Acoustic Subsystem */}
+      <div className="workbench-panel p-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Scan className="w-4 h-4 text-primary" />
+            <h2 className="text-xs font-bold text-on-surface uppercase tracking-wider">
+              Zero-Dependency Optical Verification &amp; Acoustic Telemetry Subsystem
+            </h2>
+          </div>
+          <span className="text-[10px] font-mono font-bold bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded">
+            ISO/IEC 18004 &bull; ISBT 128
+          </span>
+        </div>
+
+        <p className="text-xs text-on-surface-variant leading-relaxed">
+          Engineered for 100% offline, standalone operation without third-party cloud barcode APIs or external audio assets:
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="p-4 bg-surface-container-low border border-outline-variant/20 rounded-xl space-y-2">
+            <div className="font-bold text-on-surface flex items-center space-x-2">
+              <QrCode className="w-4 h-4 text-primary" />
+              <span>1. Pure Math QR Generator (Model 2)</span>
+            </div>
+            <p className="text-on-surface-variant text-[11px] leading-relaxed">
+              Standard-compliant QR generator implemented in pure TypeScript. Computes Galois Field GF(256) arithmetic, generator polynomials, and Reed-Solomon Error Correction (Levels L/M/Q/H) directly into mathematical vector SVG without external scripts.
+            </p>
+          </div>
+
+          <div className="p-4 bg-surface-container-low border border-outline-variant/20 rounded-xl space-y-2">
+            <div className="font-bold text-on-surface flex items-center space-x-2">
+              <FileText className="w-4 h-4 text-primary" />
+              <span>2. Optical Code 128 / ISBT 128 DIN Barcodes</span>
+            </div>
+            <p className="text-on-surface-variant text-[11px] leading-relaxed">
+              Generates high-density Code 128 (Subset B) and Code 39 clinical barcodes with modulo-103 checksum calculation. Automatically formats international ISBT 128 Donation Identification Numbers (e.g. <code>=W4821 26 104820 00</code>) for cold-chain transfusion bags.
+            </p>
+          </div>
+
+          <div className="p-4 bg-surface-container-low border border-outline-variant/20 rounded-xl space-y-2">
+            <div className="font-bold text-on-surface flex items-center space-x-2">
+              <Volume2 className="w-4 h-4 text-primary" />
+              <span>3. Synthetic Web Audio API Chimes</span>
+            </div>
+            <p className="text-on-surface-variant text-[11px] leading-relaxed">
+              Real-time synthesizer generating acoustic alarms (880Hz alternating Code Crimson pulse, 4-tone harmonic unmasking chord, and 1046Hz scan ping) with zero external MP3/WAV files. Works completely offline in air-gapped hospital LANs.
+            </p>
+          </div>
+
+          <div className="p-4 bg-surface-container-low border border-outline-variant/20 rounded-xl space-y-2">
+            <div className="font-bold text-on-surface flex items-center space-x-2">
+              <Thermometer className="w-4 h-4 text-emerald-700" />
+              <span>4. Cold-Chain Custody Slips (+2°C to +6°C)</span>
+            </div>
+            <p className="text-on-surface-variant text-[11px] leading-relaxed">
+              One-click print-ready physical dispatch manifests complying with Schedule F Part XII-B of Drugs and Cosmetics Rules (1945). Features thermal log sign-offs, courier vehicle registration, and ice gel pack integrity audit checks.
+            </p>
           </div>
         </div>
       </div>

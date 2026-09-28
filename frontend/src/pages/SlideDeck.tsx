@@ -352,9 +352,10 @@ export const SlideDeck: React.FC = () => {
                   </div>
                   <ul className="space-y-1.5 text-on-surface-variant leading-relaxed">
                     <li>&bull; High-density clinical dispatch console</li>
-                    <li>&bull; Clinical Dispatch design system tokens</li>
-                    <li>&bull; SVG stroke vector icons (Lucide)</li>
-                    <li>&bull; Interactive donor mobile portal</li>
+                    <li>&bull; Pure Math QR (Model 2) &amp; Code 128 / ISBT 128 engine</li>
+                    <li>&bull; Zero-asset Web Audio API synthetic chimes</li>
+                    <li>&bull; Print-ready cold-chain specimen manifests</li>
+                    <li>&bull; Interactive donor mobile voucher portal</li>
                   </ul>
                 </div>
               </div>
@@ -379,10 +380,12 @@ export const SlideDeck: React.FC = () => {
                   </div>
                   <ul className="space-y-2 text-emerald-950 text-[11px] leading-relaxed">
                     <li>&bull; Full Request, Match, Notify, and Accept dispatch cycle.</li>
+                    <li>&bull; On-site optical QR &amp; Voucher verification desk scanner.</li>
+                    <li>&bull; Standards-compliant ISBT 128 cold-chain transport manifest generation.</li>
                     <li>&bull; Strict 90-day (M) and 120-day (F) whole blood cooldown enforcement.</li>
                     <li>&bull; 14-day platelet apheresis recovery interval calculation.</li>
                     <li>&bull; Donor contact privacy locked until explicit voluntary accept.</li>
-                    <li>&bull; Proximity calculations and transparent filtering audit log.</li>
+                    <li>&bull; Synthetic Web Audio telemetry and native push notification pings.</li>
                   </ul>
                 </div>
 
