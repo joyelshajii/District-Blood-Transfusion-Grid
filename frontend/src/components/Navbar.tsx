@@ -13,8 +13,11 @@ import {
   Search,
   Flame,
   Radio,
-  FileText
+  FileText,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
+import { soundEngine } from '../utils/soundEngine';
 
 interface NavbarProps {
   currentTab: string;
@@ -36,6 +39,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [currentTime, setCurrentTime] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
+  const [isAudioMuted, setIsAudioMuted] = useState(soundEngine.isMuted());
+
+  useEffect(() => {
+    return soundEngine.subscribe(setIsAudioMuted);
+  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -84,12 +92,37 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2.5">
             <span className="text-slate-200">{currentTime || '18:30:00 IST'}</span>
+            <span className="text-slate-600">/</span>
+            
+            {/* Audio Telemetry Toggle Button */}
+            <button
+              onClick={() => soundEngine.toggleMute()}
+              className={`flex items-center space-x-1 px-2 py-0.5 rounded text-[10px] font-mono transition-all cursor-pointer ${
+                !isAudioMuted
+                  ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-600/70 shadow-xs'
+                  : 'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 border border-slate-700'
+              }`}
+              title={!isAudioMuted ? 'Acoustic clinical dispatch chimes active. Click to mute.' : 'Acoustic dispatch chimes muted. Click to enable.'}
+            >
+              {!isAudioMuted ? (
+                <>
+                  <Volume2 className="w-3 h-3 text-emerald-400" />
+                  <span className="hidden sm:inline">CHIME: ON</span>
+                </>
+              ) : (
+                <>
+                  <VolumeX className="w-3 h-3 text-red-400" />
+                  <span className="hidden sm:inline">MUTED</span>
+                </>
+              )}
+            </button>
+
             <span className="text-slate-600">/</span>
             <button
               onClick={onToggleEvaluationDrawer}
-              className={`flex items-center space-x-1 px-2.5 py-0.5 rounded text-[10px] font-semibold transition-colors ${
+              className={`flex items-center space-x-1 px-2.5 py-0.5 rounded text-[10px] font-semibold transition-colors cursor-pointer ${
                 evaluationDrawerOpen
                   ? 'bg-[#991b1b] text-white shadow-xs'
                   : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
@@ -153,8 +186,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               return (
                 <button
                   key={item.id}
-                  onClick={() => setCurrentTab(item.id)}
-                  className={`px-3 py-1.5 rounded transition-all flex items-center space-x-1.5 ${
+                  onClick={() => {
+                    soundEngine.playTriageClick();
+                    setCurrentTab(item.id);
+                  }}
+                  className={`px-3 py-1.5 rounded transition-all flex items-center space-x-1.5 cursor-pointer ${
                     isActive
                       ? item.highlight
                         ? 'bg-[#991b1b] text-white shadow-xs font-semibold'
@@ -183,8 +219,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Desktop Action Controls */}
           <div className="hidden md:flex items-center space-x-2.5">
             <button
-              onClick={onOpenNewRequestModal}
-              className="btn-primary text-xs py-1.5 px-3 flex items-center space-x-1.5 shadow-sm"
+              onClick={() => {
+                soundEngine.playCodeCrimsonAlert();
+                onOpenNewRequestModal();
+              }}
+              className="btn-primary text-xs py-1.5 px-3 flex items-center space-x-1.5 shadow-sm cursor-pointer"
             >
               <span className="material-symbols-outlined text-sm animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>
                 emergency_heat
