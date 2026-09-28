@@ -1,6 +1,5 @@
 # District Blood Transfusion Grid &bull; Ernakulam Sector Pilot
 
-> **Challenge SC-12 (Track 3: Public Welfare)** &bull; **AANAVANDITHON 2026 Submission**  
 > High-concurrency civic healthcare coordination infrastructure engineered for sub-10ms algorithmic matching latency, zero external runtime microservices, strict cryptographic contact data isolation, and standards-compliant optical verification.
 
 ---
