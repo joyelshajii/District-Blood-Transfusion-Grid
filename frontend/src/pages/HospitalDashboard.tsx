@@ -22,9 +22,11 @@ import {
   FileSpreadsheet,
   X,
   Scan,
-  QrCode
+  QrCode,
+  Printer
 } from 'lucide-react';
 import { QRVoucherScanner, VerifiedVoucherPayload } from '../components/QRVoucherScanner';
+import { TransportSlipModal } from '../components/TransportSlipModal';
 
 interface HospitalDashboardProps {
   onNavigateToDonorSimulator: (token?: string) => void;
@@ -54,6 +56,7 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
   const [urgencyFilter, setUrgencyFilter] = useState('ALL');
   const [showIneligibleTable, setShowIneligibleTable] = useState(false);
   const [scannerOpen, setScannerOpen] = useState(false);
+  const [transportSlipOpen, setTransportSlipOpen] = useState(false);
   const [verifiedVouchers, setVerifiedVouchers] = useState<Record<string, VerifiedVoucherPayload>>({});
 
   // New request form state
@@ -603,6 +606,15 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
                       >
                         <Scan className="w-3.5 h-3.5" />
                         <span>Scan Admission Voucher</span>
+                      </button>
+
+                      <button
+                        onClick={() => setTransportSlipOpen(true)}
+                        className="btn-secondary text-xs py-1.5 px-3 flex items-center space-x-1.5 cursor-pointer bg-white"
+                        title="Generate printable cold-chain specimen transfer requisition manifest"
+                      >
+                        <Printer className="w-3.5 h-3.5 text-primary" />
+                        <span>Cold-Chain Slip</span>
                       </button>
 
                       <div className="flex items-center gap-2 font-mono text-[11px] text-[#00402d] bg-white px-2.5 py-1 rounded border border-emerald-200">
@@ -1308,6 +1320,25 @@ export const HospitalDashboard: React.FC<HospitalDashboardProps> = ({
               type: 'success',
               text: `Admission voucher authenticated for ${v.donorCode}. On-site reception logged.`,
             });
+          }}
+        />
+      )}
+
+      {/* Cold-Chain Specimen Transport Requisition Slip Modal */}
+      {selectedRequest && (
+        <TransportSlipModal
+          isOpen={transportSlipOpen}
+          onClose={() => setTransportSlipOpen(false)}
+          data={{
+            caseNumber: selectedRequest.case_number,
+            hospitalName: selectedRequest.hospital_name,
+            hospitalTaluk: selectedRequest.hospital_taluk,
+            donorCode: acceptedContacts[0]?.donor_code || 'DONOR-EKM-003',
+            bloodGroup: selectedRequest.blood_group,
+            component: selectedRequest.component,
+            units: selectedRequest.units_required,
+            urgencyLevel: selectedRequest.urgency_level,
+            patientCode: selectedRequest.patient_code,
           }}
         />
       )}
