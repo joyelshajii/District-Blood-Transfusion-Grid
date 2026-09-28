@@ -15,8 +15,12 @@ import {
   Smartphone,
   QrCode,
   Heart,
-  Navigation
+  Navigation,
+  Printer,
+  Download
 } from 'lucide-react';
+import { QRCodeSVG } from '../utils/qrCode';
+import { BarcodeSVG } from '../utils/barcode';
 
 interface DonorSimulationPortalProps {
   initialToken?: string;
@@ -582,38 +586,86 @@ export const DonorSimulationPortal: React.FC<DonorSimulationPortalProps> = ({
 
               {/* Decision Protocol Hub */}
               {responseStatus === 'ACCEPTED' ? (
-                <div className="p-5 bg-[#f0fdf4] rounded-lg border-2 border-[#047857] text-xs space-y-3.5 shadow-sm">
+                <div className="p-5 bg-[#f0fdf4] rounded-xl border-2 border-[#047857] text-xs space-y-4 shadow-sm animate-in zoom-in-95 duration-200">
                   <div className="flex items-center space-x-2.5 text-[#00402d] font-bold">
-                    <div className="w-8 h-8 rounded-full bg-[#047857] text-white flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-[#047857] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <CheckCircle2 className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-headline font-bold text-sm">Commitment Authenticated &bull; Fast-Track Issued</h4>
+                      <h4 className="font-headline font-bold text-sm">Commitment Authenticated &bull; Fast-Track Voucher Issued</h4>
                       <p className="text-[11px] text-[#00402d] font-normal">
                         Contact unmasked exclusively to the Blood Bank Desk at <strong>{dispatchData.hospital_name}</strong>.
                       </p>
                     </div>
                   </div>
 
-                  <div className="bg-white p-3.5 rounded border border-emerald-200 text-xs space-y-1.5 font-mono">
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Fast-Track Pass Token:</span>
-                      <span className="font-bold text-[#991b1b]">#PASS-{dispatchData.token.slice(0, 8).toUpperCase()}</span>
+                  {/* Optical Voucher Card with Real SVG QR Code & Barcode */}
+                  <div className="bg-white p-4 rounded-xl border border-emerald-200 shadow-xs space-y-4">
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                      {/* Scalable Vector QR Code */}
+                      <div className="p-2 bg-white rounded-lg border border-slate-200 shadow-2xs shrink-0 flex flex-col items-center">
+                        <QRCodeSVG
+                          value={`district-blood://voucher/${dispatchData.token}?donor=${dispatchData.donor_code_name}&hosp=${encodeURIComponent(dispatchData.hospital_name)}&bg=${encodeURIComponent(dispatchData.blood_group_required)}&ts=${Date.now()}`}
+                          size={130}
+                          fgColor="#0d1c2f"
+                        />
+                        <span className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest mt-1">
+                          DESK SCANNER QR
+                        </span>
+                      </div>
+
+                      {/* Optical Barcode and Key Credentials */}
+                      <div className="flex-1 w-full space-y-2.5 text-xs">
+                        <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
+                          <div className="bg-slate-50 p-2 rounded border border-slate-200">
+                            <span className="text-slate-400 block text-[9px] uppercase">Pass Token</span>
+                            <span className="font-bold text-[#991b1b]">#PASS-{dispatchData.token.slice(0, 8).toUpperCase()}</span>
+                          </div>
+                          <div className="bg-slate-50 p-2 rounded border border-slate-200">
+                            <span className="text-slate-400 block text-[9px] uppercase">Arrival ETA</span>
+                            <span className="font-bold text-emerald-800">{selectedEta}</span>
+                          </div>
+                          <div className="bg-slate-50 p-2 rounded border border-slate-200">
+                            <span className="text-slate-400 block text-[9px] uppercase">Gate Clearance PIN</span>
+                            <span className="font-bold text-[#0d1c2f]">4082</span>
+                          </div>
+                          <div className="bg-slate-50 p-2 rounded border border-slate-200">
+                            <span className="text-slate-400 block text-[9px] uppercase">Parking Access</span>
+                            <span className="font-bold text-emerald-800">BAY #02 RESERVED</span>
+                          </div>
+                        </div>
+
+                        {/* Optical Code 128 Barcode */}
+                        <div className="overflow-x-auto pt-1 flex justify-center sm:justify-start">
+                          <BarcodeSVG
+                            value={`VOUCH-${dispatchData.token.slice(0, 8).toUpperCase()}`}
+                            type="code128"
+                            height={32}
+                            barWidth={1.3}
+                            captionTitle="TRANSIT PASS CODE 128"
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Confirmed Window:</span>
-                      <span className="font-bold text-emerald-800">{selectedEta}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Gate Intercom Access PIN:</span>
-                      <span className="font-bold text-[#0d1c2f]">4082</span>
+
+                    <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between text-[11px] text-slate-500">
+                      <span>Present this digital pass at Hospital Security Gate #1</span>
+                      <span className="font-mono text-emerald-800 font-bold">LEVEL-1 PRIORITY CLEARANCE</span>
                     </div>
                   </div>
 
-                  <div className="pt-1 flex items-center space-x-3">
+                  <div className="pt-1 flex flex-wrap items-center justify-between gap-3">
+                    <button
+                      onClick={() => window.print()}
+                      className="btn-secondary text-xs py-2 px-3 flex items-center space-x-1.5 cursor-pointer"
+                    >
+                      <Printer className="w-3.5 h-3.5" />
+                      <span>Print Admission Pass</span>
+                    </button>
+
                     <button
                       onClick={onNavigateToHospital}
-                      className="btn-primary text-xs py-2 px-4 flex items-center space-x-1.5 shadow-xs"
+                      className="btn-primary text-xs py-2 px-4 flex items-center space-x-1.5 shadow-xs cursor-pointer"
                     >
                       <span>Return to Hospital View to verify unmasked contact</span>
                       <ArrowRight className="w-3.5 h-3.5" />
